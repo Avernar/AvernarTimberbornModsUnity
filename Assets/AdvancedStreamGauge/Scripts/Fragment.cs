@@ -4,16 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Avernar.Gauge {
     public class Fragment {
-        private readonly ILoc _loc;
         private bool _usingDragger;
-        private readonly float _sliderStep;
-        private readonly float _sliderStepInv;
-
-        public Fragment(ILoc loc, float sliderStep = 1.0f) {
-            this._sliderStep = sliderStep;
-            this._sliderStepInv = 1.0f / this._sliderStep;
-            this._loc = loc;
-        }
 
         protected void RegisterMouseCallbacks(Slider slider) {
             VisualElement dragger = slider.Q<VisualElement>("unity-dragger", (string)null);
@@ -36,7 +27,7 @@ namespace Avernar.Gauge {
             this._usingDragger = false;
         }
 
-        protected float SnapSliderValue(ChangeEvent<float> changeEvent) {
+        protected float SnapSliderValue(ChangeEvent<float> changeEvent, float sliderStep) {
             float newValue = 0.0f;
             if (this._usingDragger) {
                 newValue = changeEvent.newValue;
@@ -44,13 +35,13 @@ namespace Avernar.Gauge {
             else {
                 float diff = changeEvent.newValue - changeEvent.previousValue;
                 if (diff > 0.0f) {
-                    newValue = changeEvent.previousValue + this._sliderStep;
+                    newValue = changeEvent.previousValue + sliderStep;
                 }
                 else if (diff < 0.0f) {
-                    newValue = changeEvent.previousValue - this._sliderStep;
+                    newValue = changeEvent.previousValue - sliderStep;
                 }
             }
-            newValue = Mathf.Round(newValue * this._sliderStepInv) / this._sliderStepInv;
+            newValue = Mathf.Round(newValue / sliderStep) * sliderStep;
             return newValue;
         }
     }

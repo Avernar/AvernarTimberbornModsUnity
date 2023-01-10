@@ -74,7 +74,7 @@ namespace Avernar.Gauge {
                 bool haveLink = FindLink() != null;
                 if (haveLink) {
                     var gauge = this._linkee.GetComponent<AdvancedStreamGaugeBase>();
-                    gauge.Tick();
+                    gauge.Calculate();
                     this._targetButtonText.text = _loc.T(LinkTextKey, gauge.WaterLevel.ToString("0.00"), gauge.StatusText());
                     this._buttonContainer.ToggleDisplayStyle(false);
                     this._targetContainer.ToggleDisplayStyle(true);

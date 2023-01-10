@@ -19,7 +19,10 @@ namespace Avernar.Gauge {
         protected static readonly PropertyKey<WeatherActions> ActionsKey = new(nameof(Actions));
         protected static readonly PropertyKey<GaugeConfig> Gauge1Key = new(nameof(Gauge1));
         protected static readonly PropertyKey<bool> AutomaticKey = new(nameof(Automatic));
+        protected static readonly PropertyKey<bool> BackflowPreventionKey = new(nameof(BackflowPrevention));
 
+        protected bool _finished;
+        protected EntityLinker _linker;
         protected BlockObject _blockObject;
         protected Floodgate _floodgate;
 
@@ -38,6 +41,7 @@ namespace Avernar.Gauge {
         public bool Automatic { get; set; }
         public float ClosedLevel { get; set; }
         public float OpenedLevel { get; set; }
+        public bool BackflowPrevention { get; set; }
 
         FloodgateMonobehaviour() {
             this.Actions = new (SeasonSetting.Off, SeasonSetting.Off);
@@ -55,24 +59,30 @@ namespace Avernar.Gauge {
         }
 
         public void Awake() {
+            this._linker = GetComponent<EntityLinker>();
             this._blockObject = this.GetComponent<BlockObject>();
             this._floodgate = this.GetComponent<Floodgate>();
+            _finished = false;
         }
 
-        protected void Validate(ref EntityLinker linkee) {
+        public void OnEnterFinishedState() => this._finished = true;
+
+        public void OnExitFinishedState() => this.enabled = false;
+
+        T GetLink<T>(ref EntityLinker linkee) where T : Object {
             if ((bool)linkee) {
                 bool found = false;
-                EntityLinker linker = GetComponent<EntityLinker>();
-                ReadOnlyCollection<EntityLink> links = (ReadOnlyCollection<EntityLink>)linker.EntityLinks;
+                ReadOnlyCollection<EntityLink> links = (ReadOnlyCollection<EntityLink>)_linker.EntityLinks;
                 foreach (var link in links) {
                     if (linkee == link.Linkee) {
-                        return;
+                        return linkee.GetComponent<T>();
                     }
                 }
                 if (!found) {
                     linkee = null;
                 }
             }
+            return default;
         }
 
         public bool Open() {
@@ -98,13 +108,34 @@ namespace Avernar.Gauge {
         }
 
         public override void Tick() {
-            if (Automatic) {
-                Validate(ref this.FirstLink);
-                Validate(ref this.SecondLink);
-                if (Open()) {
-                    if (this.SecondLink != null) {
-                        var gauge = this.SecondLink.GetComponent<AdvancedStreamGaugeBase>();
-                        float relativeWaterLevel = Mathf.Clamp(gauge.WaterLevel + (gauge.BaseZ - BaseZ), 0.0f, _floodgate.MaxHeight);
+            if (_finished && Automatic) {
+                var setting = Actions.Get(_droughtServíce.IsDrought);
+                if (setting == SeasonSetting.Off) {
+                    SetHeight(ClosedLevel);
+                    return;
+                }
+
+                AdvancedStreamGaugeBase gauge1 = GetLink<AdvancedStreamGaugeBase>(ref this.FirstLink);
+
+                if (setting == SeasonSetting.Gauge) {
+                    AdvancedStreamGaugeStatus status1 = gauge1 == null ? AdvancedStreamGaugeStatus.Incomplete : gauge1.Status;
+                    if (!this.Gauge1.On(status1)) {
+                        SetHeight(ClosedLevel);
+                        return;
+                    }
+                }
+
+                AdvancedStreamGaugeBase gauge2 = GetLink<AdvancedStreamGaugeBase>(ref this.SecondLink);
+                if (gauge2 != null) {
+                    if (gauge2.Status != AdvancedStreamGaugeStatus.Incomplete) {
+                        if (BackflowPrevention && gauge1 != null && gauge1 != gauge2) {
+                            if (gauge1.AbsoluteWaterLevel >= gauge2.AbsoluteWaterLevel) {
+                                SetHeight(ClosedLevel);
+                                return;
+                            }
+                        }
+
+                        float relativeWaterLevel = Mathf.Clamp(gauge2.AbsoluteWaterLevel + -BaseZ, 0.0f, _floodgate.MaxHeight);
                         if (relativeWaterLevel > OpenedLevel) {
                             float temp = (int)relativeWaterLevel;
                             float targetLevel = Mathf.Max(0.0f,
@@ -114,18 +145,11 @@ namespace Avernar.Gauge {
                                 );
 
                             SetHeight(targetLevel);
-                        }
-                        else {
-                            SetHeight(OpenedLevel);
+                            return;
                         }
                     }
-                    else {
-                        SetHeight(OpenedLevel);
-                    }
                 }
-                else {
-                    SetHeight(ClosedLevel);
-                }
+                SetHeight(OpenedLevel);
             }
         }
 
@@ -140,6 +164,7 @@ namespace Avernar.Gauge {
             objectSaver.Set(ActionsKey, this.Actions, this._weatherActionsSerializer);
             objectSaver.Set(Gauge1Key, this.Gauge1, this._waterPumpGaugeConfigSerializer);
             objectSaver.Set(AutomaticKey, this.Automatic);
+            objectSaver.Set(BackflowPreventionKey, this.BackflowPrevention);
         }
 
         public void Load(IEntityLoader entityLoader) {
@@ -157,13 +182,10 @@ namespace Avernar.Gauge {
                 this.Actions = objectLoader.Get(ActionsKey, this._weatherActionsSerializer);
                 this.Gauge1 = objectLoader.Get(Gauge1Key, this._waterPumpGaugeConfigSerializer);
                 this.Automatic = objectLoader.Get(AutomaticKey);
+                if (objectLoader.Has(BackflowPreventionKey)) {
+                    this.BackflowPrevention = objectLoader.Get(BackflowPreventionKey);
+                }
             }
-        }
-
-        public void OnEnterFinishedState() {
-        }
-
-        public void OnExitFinishedState() {
         }
     }
 }

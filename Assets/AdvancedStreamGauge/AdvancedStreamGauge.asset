@@ -34,7 +34,7 @@ MonoBehaviour:
   Author: Avernar
   Name: AdvancedStreamGauge
   Description: Advanced Water Gauge
-  Version: 1.1.0
+  Version: 1.1.1
   Dependencies: []
 --- !u!114 &-3041366049039997682
 MonoBehaviour:

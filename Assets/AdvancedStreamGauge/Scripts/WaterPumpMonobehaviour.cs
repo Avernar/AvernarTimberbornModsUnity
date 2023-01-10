@@ -17,6 +17,7 @@ namespace Avernar.Gauge {
         protected static readonly PropertyKey<GaugeConfig> Gauge2Key = new(nameof(Gauge2));
         protected static readonly PropertyKey<bool> OrKey = new(nameof(Or));
 
+        private bool _finished;
         private DroughtService _droughtServíce;
         private WeatherActionsSerializer _weatherActionsSerializer;
         private WaterPumpGaugeConfigSerializer _waterPumpGaugeConfigSerializer;
@@ -29,7 +30,7 @@ namespace Avernar.Gauge {
         public bool Or;
 
         WaterPumpMonobehaviour() {
-            this.Actions = new (SeasonSetting.Gauge, SeasonSetting.Gauge);
+            this.Actions = new (SeasonSetting.On, SeasonSetting.On);
             this.Gauge1 = new (true, true, true, false, false, false);
             this.Gauge2 = new (false, true, true, true, true, true);
             this.Or = false;
@@ -43,7 +44,12 @@ namespace Avernar.Gauge {
         }
 
         public void Awake() {
+            _finished = false;
         }
+
+        public void OnEnterFinishedState() => this._finished = true;
+
+        public void OnExitFinishedState() => this.enabled = false;
 
         protected void Validate(ref EntityLinker linkee) {
             if ((bool)linkee) {
@@ -84,15 +90,17 @@ namespace Avernar.Gauge {
         }
 
         public override void Tick() {
-            Validate(ref this.FirstLink);
-            Validate(ref this.SecondLink);
+            if (_finished) {
+                //Validate(ref this.FirstLink);
+                //Validate(ref this.SecondLink);
 
-            var pausable = GetComponent<PausableBuilding>();
-            if (On()) {
-                pausable.Resume();
-            }
-            else {
-                pausable.Pause();
+                var pausable = GetComponent<PausableBuilding>();
+                if (On()) {
+                    pausable.Resume();
+                }
+                else {
+                    pausable.Pause();
+                }
             }
         }
 
@@ -131,12 +139,6 @@ namespace Avernar.Gauge {
                 this.Actions.Temperate = SeasonSetting.On;
                 this.Actions.Drought = SeasonSetting.On;
             }
-        }
-
-        public void OnEnterFinishedState() {
-        }
-
-        public void OnExitFinishedState() {
         }
     }
 }

@@ -4,11 +4,11 @@
     <ui:VisualElement class="small-radio-buttons">
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Temperate:" text-loc-key="Avernar.AdvancedStreamGauge.TemperateLabel" />
-            <ui:RadioButtonGroup value="-1" name="Temperate" choices="Off,On,Gauge" />
+            <ui:RadioButtonGroup value="0" name="Temperate" choices="Off,On,Gauge" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Drought:" text-loc-key="Avernar.AdvancedStreamGauge.DroughtLabel" />
-            <ui:RadioButtonGroup value="-1" name="Drought" choices="Off,On,Gauge" />
+            <ui:RadioButtonGroup value="0" name="Drought" choices="Off,On,Gauge" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

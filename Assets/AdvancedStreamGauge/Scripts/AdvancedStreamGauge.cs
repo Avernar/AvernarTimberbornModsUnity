@@ -93,8 +93,7 @@ namespace Avernar.Gauge {
             return null;
         }
 
-        public override void Tick()
-        {
+        public override void Tick() {
         }
 
         protected Vector2Int GetCoordinatesXY() => this._blockObject.PositionedBlocks.GetOccupiedCoordinates().Select<Vector3Int, Vector2Int>((Func<Vector3Int, Vector2Int>)(coords => coords.XY())).Distinct<Vector2Int>().First<Vector2Int>();

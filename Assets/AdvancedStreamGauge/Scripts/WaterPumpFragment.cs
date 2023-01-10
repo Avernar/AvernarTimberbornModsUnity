@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 
 namespace Avernar.Gauge {
-    internal class WaterPumpFragment : Fragment, IEntityPanelFragment {
+    internal class WaterPumpFragment : IEntityPanelFragment {
         private static readonly string AndLocKey = "Avernar.AdvancedStreamGauge.And";
         private static readonly string OrLocKey = "Avernar.AdvancedStreamGauge.Or";
         private readonly ILoc _loc;
@@ -28,7 +28,7 @@ namespace Avernar.Gauge {
         private RadioButtonGroup _andOr;
         private WaterPumpMonobehaviour _waterPump;
 
-        public WaterPumpFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) : base(loc) {
+        public WaterPumpFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
             this._loc = loc;
             this._assetLoader = assetLoader;
             this._linkPanelFragment1 = new LinkPanelFragment(loc, assetLoader, pickObjectTool, selectionManager);

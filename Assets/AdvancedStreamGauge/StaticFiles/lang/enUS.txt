@@ -32,6 +32,7 @@ Avernar.AdvancedStreamGauge.High,High,-
 Avernar.AdvancedStreamGauge.Overflow,Overflow,-
 Avernar.AdvancedStreamGauge.HighSetPoint,High set point: {0},-
 Avernar.AdvancedStreamGauge.LowSetPoint,Low set point: {0},-
+Avernar.AdvancedStreamGauge.AntiSlosh,Anti slosh: {0},-
 Avernar.AdvancedStreamGauge.Controls,Advanced Stream Gauge Controls,-
 Avernar.AdvancedStreamGauge.Link,Link
 Avernar.AdvancedStreamGauge.StartLinkingTitle,Advanced Stream Gauge Linker
@@ -58,3 +59,4 @@ Avernar.AdvancedStreamGauge.ControlGauge,Control Gauge:
 Avernar.AdvancedStreamGauge.SlowOpenGauge,Slow Open Gauge:
 Avernar.AdvancedStreamGauge.Automatic,Automatic
 Avernar.AdvancedStreamGauge.Manual,Manual
+Avernar.AdvancedStreamGauge.BackflowPrevention,Backflow prevention:

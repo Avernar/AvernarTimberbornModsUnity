@@ -10,7 +10,7 @@
         </ui:VisualElement>
         <ui:VisualElement class="content-centered top-margin avernar">
             <ui:VisualElement class="horizontal">
-                <ui:RadioButtonGroup value="-1" name="ManualAutomatic" choices="Manual,Automatic" />
+                <ui:RadioButtonGroup value="0" name="ManualAutomatic" choices="Manual,Automatic" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="SettingsContainer" class="bottom-margin top-margin-big">
@@ -29,6 +29,12 @@
         <ui:VisualElement class="top-margin-big">
             <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text="Slow Open Gauge:" text-loc-key="Avernar.AdvancedStreamGauge.SlowOpenGauge" class="entity-panel__text top-margin-big" />
             <ui:Instance template="LinkPanel" name="LinkPanel2" class="top-margin" />
+        </ui:VisualElement>
+        <ui:VisualElement class="top-margin">
+            <ui:VisualElement class="horizontal">
+                <Timberborn.CoreUI.LocalizableLabel text="Backflow prevention:" text-loc-key="Avernar.AdvancedStreamGauge.BackflowPrevention" />
+                <ui:RadioButtonGroup value="0" name="BackflowPrevention" choices="Off,On" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </Timberborn.CoreUI.NineSliceVisualElement>
 </ui:UXML>

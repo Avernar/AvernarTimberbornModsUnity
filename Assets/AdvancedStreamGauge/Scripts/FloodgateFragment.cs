@@ -15,6 +15,8 @@ namespace Avernar.Gauge {
     internal class FloodgateFragment : Fragment, IEntityPanelFragment {
         private static readonly string ManualKey = "Avernar.AdvancedStreamGauge.Manual";
         private static readonly string AutomaticKey = "Avernar.AdvancedStreamGauge.Automatic";
+        private static readonly string OffLocKey = "Avernar.AdvancedStreamGauge.Off";
+        private static readonly string OnLocKey = "Avernar.AdvancedStreamGauge.On";
         private static readonly string ClosedLocKey = "Avernar.AdvancedStreamGauge.Closed";
         private static readonly string OpenedLocKey = "Avernar.AdvancedStreamGauge.Opened";
         private static readonly float SliderStep = 0.5f;
@@ -25,16 +27,18 @@ namespace Avernar.Gauge {
         private readonly WeatherActionsFragment _weatherActionsFragment;
         private readonly GaugeConfigFragment _waterPumpConfigFragment1;
         private readonly List<string> _manualAutomaticOptions = new();
+        private readonly List<string> _offOnOptions = new();
         private UIBuilder _timberApiUiBuilder;
         private VisualElement _root;
         private RadioButtonGroup _manualAutomatic;
+        private RadioButtonGroup _backflowPrevention;
         private Label _closedLabel;
         private Label _openedLabel;
         private Slider _closedSlider;
         private Slider _openedSlider;
         private FloodgateMonobehaviour _floodgate;
 
-        public FloodgateFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) : base(loc, SliderStep) {
+        public FloodgateFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
             this._loc = loc;
             this._assetLoader = assetLoader;
             this._linkPanelFragment1 = new LinkPanelFragment(loc, assetLoader, pickObjectTool, selectionManager);
@@ -43,6 +47,8 @@ namespace Avernar.Gauge {
             this._waterPumpConfigFragment1 = new GaugeConfigFragment(loc, true);
             this._manualAutomaticOptions.Add(_loc.T(ManualKey));
             this._manualAutomaticOptions.Add(_loc.T(AutomaticKey));
+            this._offOnOptions.Add(_loc.T(OffLocKey));
+            this._offOnOptions.Add(_loc.T(OnLocKey));
         }
 
         [Inject]
@@ -62,6 +68,10 @@ namespace Avernar.Gauge {
             this._manualAutomatic = this._root.Q<RadioButtonGroup>("ManualAutomatic", (string)null);
             this._manualAutomatic.choices = this._manualAutomaticOptions;
             this._manualAutomatic.RegisterValueChangedCallback(ManualAutomaticChanged);
+
+            this._backflowPrevention = this._root.Q<RadioButtonGroup>("BackflowPrevention", (string)null);
+            this._backflowPrevention.choices = this._offOnOptions;
+            this._backflowPrevention.RegisterValueChangedCallback(BackflowPreventionChanged);
 
             this._closedLabel = this._root.Q<Label>("ClosedLabel", (string)null);
             this._openedLabel = this._root.Q<Label>("OpenedLabel", (string)null);
@@ -94,6 +104,10 @@ namespace Avernar.Gauge {
         }
         private void ManualAutomaticChanged(ChangeEvent<int> e) {
             this._floodgate.Automatic = e.newValue == 1;
+        }
+
+        private void BackflowPreventionChanged(ChangeEvent<int> e) {
+            this._floodgate.BackflowPrevention = e.newValue == 1;
         }
 
         public void ShowFragment(GameObject entity) {
@@ -150,7 +164,7 @@ namespace Avernar.Gauge {
         }
 
         private void ClosedChange(ChangeEvent<float> changeEvent) {
-            float newValue = SnapSliderValue(changeEvent);
+            float newValue = SnapSliderValue(changeEvent, SliderStep);
             this._closedSlider.SetValueWithoutNotify(newValue);
             if (this._floodgate.ClosedLevel != newValue) {
                 this._floodgate.ClosedLevel = newValue;
@@ -164,7 +178,7 @@ namespace Avernar.Gauge {
         }
 
         private void OpenedChange(ChangeEvent<float> changeEvent) {
-            float newValue = SnapSliderValue(changeEvent);
+            float newValue = SnapSliderValue(changeEvent, SliderStep);
             this._openedSlider.SetValueWithoutNotify(newValue);
             if (this._floodgate.OpenedLevel != newValue) {
                 this._floodgate.OpenedLevel = newValue;

@@ -17,6 +17,7 @@ namespace Avernar.Gauge {
         private static readonly string WaterCurrentLocKey = "Avernar.AdvancedStreamGauge.WaterCurrent";
         private static readonly string HighSetPointLocKey = "Avernar.AdvancedStreamGauge.HighSetPoint";
         private static readonly string LowSetPointLocKey = "Avernar.AdvancedStreamGauge.LowSetPoint";
+        private static readonly string AntiSloshLocKey = "Avernar.AdvancedStreamGauge.AntiSlosh";
         private static readonly float SliderStep = 0.05f;
         private readonly ILoc _loc;
         private IResourceAssetLoader _assetLoader;
@@ -28,12 +29,14 @@ namespace Avernar.Gauge {
         private Label _waterCurrentLabel;
         private Label _highSetPointLabel;
         private Label _lowSetPointLabel;
+        private Label _antiSloshLabel;
         private Slider _highSetPointSlider;
         private Slider _lowSetPointSlider;
+        private Slider _antiSloshSlider;
         private AdvancedStreamGaugeBase _advancedStreamGaugeBase;
         private VisualElement _root;
 
-        public AdvancedStreamGaugeFragment(ILoc loc) : base(loc, SliderStep) {
+        public AdvancedStreamGaugeFragment(ILoc loc) {
             this._loc = loc;
         }
 
@@ -49,7 +52,7 @@ namespace Avernar.Gauge {
 
             this._root.Q<Button>("ResetHighestWaterLevelButton", (string)null).clicked += (Action)(() => this._advancedStreamGaugeBase.ResetHighestWaterLevel());
             this._root.ToggleDisplayStyle(false);
-            
+
             this._gaugeHeightLabel = this._root.Q<Label>("GaugeHeightLabel", (string)null);
             this._gaugeStatusLabel = this._root.Q<Label>("GaugeStatusLabel", (string)null);
             this._waterLevelLabel = this._root.Q<Label>("WaterLevelLabel", (string)null);
@@ -57,14 +60,18 @@ namespace Avernar.Gauge {
             this._waterCurrentLabel = this._root.Q<Label>("WaterCurrentLabel", (string)null);
             this._highSetPointLabel = this._root.Q<Label>("HighSetPointLabel", (string)null);
             this._lowSetPointLabel = this._root.Q<Label>("LowSetPointLabel", (string)null);
+            this._antiSloshLabel = this._root.Q<Label>("AntiSloshLabel", (string)null);
             this._highSetPointSlider = this._root.Q<Slider>("HighSetPointSlider", (string)null);
             this._lowSetPointSlider = this._root.Q<Slider>("LowSetPointSlider", (string)null);
+            this._antiSloshSlider = this._root.Q<Slider>("AntiSloshSlider", (string)null);
 
             this._highSetPointSlider.RegisterValueChangedCallback(HighSetPointChange);
             this._lowSetPointSlider.RegisterValueChangedCallback(LowSetPointChange);
+            this._antiSloshSlider.RegisterValueChangedCallback(AntiSloshChange);
 
             RegisterMouseCallbacks(this._highSetPointSlider);
             RegisterMouseCallbacks(this._lowSetPointSlider);
+            RegisterMouseCallbacks(this._antiSloshSlider);
 
             return this._root;
         }
@@ -73,7 +80,7 @@ namespace Avernar.Gauge {
             AdvancedStreamGauge asg = entity.GetComponent<AdvancedStreamGauge>();
             if ((bool)(UnityEngine.Object)asg) {
                 this._advancedStreamGaugeBase = asg.GetBase();
-                this._advancedStreamGaugeBase.Tick();
+                this._advancedStreamGaugeBase.Calculate();
 
                 this._highSetPointSlider.SetValueWithoutNotify(this._highSetPointSlider.lowValue);
                 this._highSetPointSlider.lowValue = this._advancedStreamGaugeBase.MinLevel;
@@ -86,6 +93,12 @@ namespace Avernar.Gauge {
                 this._lowSetPointSlider.highValue = this._advancedStreamGaugeBase.MaxLevel;
                 this._lowSetPointSlider.SetValueWithoutNotify(this._advancedStreamGaugeBase.LowSetPoint);
                 UpdateLowSetPointLabel();
+
+                this._antiSloshSlider.SetValueWithoutNotify(0);
+                this._antiSloshSlider.lowValue = 0;
+                this._antiSloshSlider.highValue = 5;
+                this._antiSloshSlider.SetValueWithoutNotify(this._advancedStreamGaugeBase.AntiSlosh);
+                UpdateAntiSloshLabel();
             }
         }
         public void ClearFragment() {
@@ -115,8 +128,12 @@ namespace Avernar.Gauge {
             this._lowSetPointLabel.text = this._loc.T<string>(AdvancedStreamGaugeFragment.LowSetPointLocKey, this._advancedStreamGaugeBase.LowSetPoint.ToString("0.00"));
         }
 
+        private void UpdateAntiSloshLabel() {
+            this._antiSloshLabel.text = this._loc.T<string>(AdvancedStreamGaugeFragment.AntiSloshLocKey, this._advancedStreamGaugeBase.AntiSlosh.ToString());
+        }
+
         private void HighSetPointChange(ChangeEvent<float> changeEvent) {
-            float newValue = SnapSliderValue(changeEvent);
+            float newValue = SnapSliderValue(changeEvent, SliderStep);
             this._highSetPointSlider.SetValueWithoutNotify(newValue);
             if (this._advancedStreamGaugeBase.HighSetPoint != newValue) {
                 this._advancedStreamGaugeBase.UpdateHighSetPoint(newValue);
@@ -130,17 +147,24 @@ namespace Avernar.Gauge {
         }
 
         private void LowSetPointChange(ChangeEvent<float> changeEvent) {
-            float newValue = SnapSliderValue(changeEvent);
+            float newValue = SnapSliderValue(changeEvent, SliderStep);
             this._lowSetPointSlider.SetValueWithoutNotify(newValue);
             if (this._advancedStreamGaugeBase.LowSetPoint != newValue) {
                 this._advancedStreamGaugeBase.UpdateLowSetPoint(newValue);
                 UpdateLowSetPointLabel();
-                if(this._advancedStreamGaugeBase.HighSetPoint < newValue) {
+                if (this._advancedStreamGaugeBase.HighSetPoint < newValue) {
                     this._advancedStreamGaugeBase.UpdateHighSetPoint(newValue);
                     UpdateHighSetPointLabel();
                     this._highSetPointSlider.SetValueWithoutNotify(newValue);
                 }
             }
+        }
+
+        private void AntiSloshChange(ChangeEvent<float> changeEvent) {
+            float newValue = SnapSliderValue(changeEvent, 1);
+            this._antiSloshSlider.SetValueWithoutNotify(newValue);
+            this._advancedStreamGaugeBase.UpdateAntiSlosh((int)MathF.Round(newValue));
+            UpdateAntiSloshLabel();
         }
     }
 }

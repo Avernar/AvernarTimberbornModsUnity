@@ -4,27 +4,27 @@
     <ui:VisualElement name="GaugeSettings" class="entity-panel__text small-radio-buttons">
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Dry:" text-loc-key="Avernar.AdvancedStreamGauge.DryLabel" />
-            <ui:RadioButtonGroup value="-1" name="Dry" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="Dry" choices="Off,On" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Low:" text-loc-key="Avernar.AdvancedStreamGauge.LowLabel" />
-            <ui:RadioButtonGroup value="-1" name="Low" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="Low" choices="Off,On" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Normal (was low):" text-loc-key="Avernar.AdvancedStreamGauge.NormalWasLowLabel" />
-            <ui:RadioButtonGroup value="-1" name="NormalWasLow" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="NormalWasLow" choices="Off,On" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Normal (was high):" text-loc-key="Avernar.AdvancedStreamGauge.NormalWasHighLabel" />
-            <ui:RadioButtonGroup value="-1" name="NormalWasHigh" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="NormalWasHigh" choices="Off,On" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="High:" text-loc-key="Avernar.AdvancedStreamGauge.HighLabel" />
-            <ui:RadioButtonGroup value="-1" name="High" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="High" choices="Off,On" />
         </ui:VisualElement>
         <ui:VisualElement class="horizontal">
             <Timberborn.CoreUI.LocalizableLabel text="Overflow:" text-loc-key="Avernar.AdvancedStreamGauge.OverflowLabel" />
-            <ui:RadioButtonGroup value="-1" name="Overflow" choices="Off,On" />
+            <ui:RadioButtonGroup value="0" name="Overflow" choices="Off,On" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
