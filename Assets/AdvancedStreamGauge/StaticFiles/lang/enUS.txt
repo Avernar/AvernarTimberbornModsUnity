@@ -1,0 +1,34 @@
+ID,Text,Comment
+Avernar.CategoryAdvancedStreamGauge.DisplayName,Advanced Stream Gauge,-
+Avernar.AdvancedStreamGaugeBase.DisplayName,Advanced Stream Gauge Base,-
+Avernar.AdvancedStreamGaugeMiddle2.DisplayName,Advanced Stream Gauge Middle 2,-
+Avernar.AdvancedStreamGaugeMiddle4.DisplayName,Advanced Stream Gauge Middle 4,-
+Avernar.AdvancedStreamGaugeMiddle8.DisplayName,Advanced Stream Gauge Middle 8,-
+Avernar.AdvancedStreamGaugeTop1.DisplayName,Advanced Stream Gauge Top 1,-
+Avernar.AdvancedStreamGaugeTop2.DisplayName,Advanced Stream Gauge Top 2,-
+Avernar.AdvancedStreamGaugeBase.Description,Start gauge with this.,-
+Avernar.AdvancedStreamGaugeMiddle.Description,Add height (depth?) to the gauge.,-
+Avernar.AdvancedStreamGaugeTop.Description,Top off the gauge with this.,-
+Avernar.AdvancedStreamGaugeBase.FlavorDescription,''Gotta start somewhere.'' --Rufus,-
+Avernar.AdvancedStreamGaugeMiddle2.FlavorDescription,''A litte bit more.'' --Rufus,-
+Avernar.AdvancedStreamGaugeMiddle4.FlavorDescription,''Bigger!'' --Rufus,-
+Avernar.AdvancedStreamGaugeMiddle8.FlavorDescription,''Waaaaaaaay bigger!!'' --Rufus,-
+Avernar.AdvancedStreamGaugeTop2.FlavorDescription,''Smidge highter and put a lid on it.'' --Rufus,-
+Avernar.AdvancedStreamGaugeTop1.FlavorDescription,''A little bit more and put a lid on it.'' --Rufus,-
+Avernar.AdvancedStreamGauge.UnsuitableBelow,Not an Advanced Stream Gauge below.,-
+Avernar.AdvancedStreamGauge.CanNotBePlaced,Can't be placed on an Advanced Stream Gauge.,-
+Avernar.AdvancedStreamGauge.GaugeHeight,Gauge height: {0},-
+Avernar.AdvancedStreamGauge.GaugeStatus,Gauge status: {0},-
+Avernar.AdvancedStreamGauge.WaterLevel,Water level: {0},-
+Avernar.AdvancedStreamGauge.HighestWaterLevel,Highest water level: {0},-
+Avernar.AdvancedStreamGauge.WaterCurrent,Water current: {0} cms,-
+Avernar.AdvancedStreamGauge.Reset,Reset,-
+Avernar.AdvancedStreamGauge.Incomplete,Incomplete,-
+Avernar.AdvancedStreamGauge.Dry,Dry,-
+Avernar.AdvancedStreamGauge.Low,Low,-
+Avernar.AdvancedStreamGauge.NormalWasHigh,Normal (Was High),-
+Avernar.AdvancedStreamGauge.NormalWasLow,Normal (Was Low),-
+Avernar.AdvancedStreamGauge.High,High,-
+Avernar.AdvancedStreamGauge.Overflow,Overflow,-
+Avernar.AdvancedStreamGauge.HighSetPoint,High set point: {0},-
+Avernar.AdvancedStreamGauge.LowSetPoint,Low set point: {0},-

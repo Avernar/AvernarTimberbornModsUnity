@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 2221139911
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cc3f5ec3f32e45584702623c4175cad6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6906b345d4aa7a4c5c26bc712b71d3d4
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4c7e2ef50f4d0834bb567e09b2c239e9, type: 3}
+- Class: 114
+  Script: {fileID: 1800879565, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
+- Class: 114
+  Script: {fileID: -871492198, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
+- Class: 114
+  Script: {fileID: -1115175677, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
+- Class: 114
+  Script: {fileID: -731835049, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Timberborn.BlockSystem
+  ClassName: Timberborn.BlockSystem.BlockSpecification
+- AssemblyName: Timberborn.BlockSystem
+  ClassName: Timberborn.BlockSystem.BlocksSpecification
+- AssemblyName: Timberborn.BlockSystem
+  ClassName: Timberborn.BlockSystem.CustomPivotSpecification
+- AssemblyName: Timberborn.BlockSystem
+  ClassName: Timberborn.BlockSystem.EntranceBlockSpecification
+Assets:
+- Assets/CategoryButton/Prefabs/CategoryButtonPrefab.prefab
+Dependencies: []

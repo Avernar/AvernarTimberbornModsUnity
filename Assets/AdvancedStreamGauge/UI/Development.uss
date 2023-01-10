@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  -unity-background-image-tint-color: white;
+}
+
+.content-centered {
+  align-items: center;
+  justify-content: center;
+}
+
+.game-text-small {
+  color: rgb(204, 204, 204);
+  font-size: 12px;
+  white-space: normal;
+}
+
+.game-text-normal {
+  color: rgb(204, 204, 204);
+  font-size: 13px;
+  white-space: normal;
+}
+
+.game-text-big {
+  color: rgb(204, 204, 204);
+  font-size: 14px;
+  white-space: normal;
+}
+
+.game-text-heading {
+  color: rgb(204, 204, 204);
+  font-size: 15px;
+  white-space: normal;
+}
+
+.game-text-title {
+  color: rgb(204, 204, 204);
+  font-size: 18px;
+  white-space: normal;
+}
+
+.game-text-separator {
+  max-width: 10px;
+  min-width: 10px;
+  -unity-text-align: middle-center;
+}
+
+.text--centered {
+  -unity-text-align: middle-center;
+}
+
+.entity-sub-panel {
+    padding: 8px 12px;
+}
+
+.entity-panel__button-wrapper {
+    margin-top: 8px;
+}
+
+.entity-panel__text {
+    color: rgb(204, 204, 204);
+    font-size: 14px;
+    white-space: normal;
+}
+
+.entity-fragment__button {
+    min-width: 50%;
+    padding: 4px;
+    --click-sound: resource('UI.Click');
+}
+
+.entity-fragment__button--red {
+    background-image: url('project://database/Assets/Timberborn/ui/images/backgrounds/bg-square-2.png?fileID=2800000&guid=7f418d074c694b74c84d0b5b294b09fb&type=3#bg-square-2');
+    -unity-slice-left: 10;
+    -unity-slice-top: 10;
+    -unity-slice-right: 10;
+    -unity-slice-bottom: 10;
+}
+
+.entity-fragment__button--red:hover:enabled {
+    background-image: url('project://database/Assets/Timberborn/ui/images/backgrounds/bg-square-5.png?fileID=2800000&guid=252db53236dadc545b2751d0eddf84d6&type=3#bg-square-5');
+    -unity-slice-left: 10;
+    -unity-slice-top: 10;
+    -unity-slice-right: 10;
+    -unity-slice-bottom: 10;
+}
+
+.bg-sub-box--green {
+    background-image: url('project://database/Assets/Timberborn/ui/images/backgrounds/bg-3.png?fileID=2800000&guid=ef1d21322662bd74f965f80120662e17&type=3#bg-3');
+    -unity-slice-left: 9;
+    -unity-slice-top: 9;
+    -unity-slice-right: 9;
+    -unity-slice-bottom: 9;
+}

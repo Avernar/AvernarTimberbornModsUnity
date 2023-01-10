@@ -1,0 +1,21 @@
+{
+  "Name": "CategoryAdvancedStreamGauge",
+  "ToolGroup": "Water",
+  "ToolOrder": 300,
+  "ButtonIcon": "CategoryAdvancedStreamGaugeIcon.png",
+  "Buildings": [
+	"AdvancedStreamGaugeBase.Folktails",
+	"AdvancedStreamGaugeMiddle2.Folktails",
+	"AdvancedStreamGaugeMiddle4.Folktails",
+	"AdvancedStreamGaugeMiddle8.Folktails",
+	"AdvancedStreamGaugeTop1.Folktails",
+	"AdvancedStreamGaugeTop2.Folktails",
+	"AdvancedStreamGaugeBase.IronTeeth",
+	"AdvancedStreamGaugeMiddle2.IronTeeth",
+	"AdvancedStreamGaugeMiddle4.IronTeeth",
+	"AdvancedStreamGaugeMiddle8.IronTeeth",
+	"AdvancedStreamGaugeTop1.IronTeeth",
+	"AdvancedStreamGaugeTop2.IronTeeth"
+  ],
+  "DisplayNameLocKey": "Avernar.CategoryAdvancedStreamGauge.DisplayName"
+}

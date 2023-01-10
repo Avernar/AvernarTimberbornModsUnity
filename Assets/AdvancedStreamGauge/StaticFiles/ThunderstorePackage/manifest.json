@@ -1,0 +1,11 @@
+{
+  "name": "AdvancedStreamGauge",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "Advanced Stream Gauge",
+  "dependencies": [
+    "BepInEx-BepInExPack_Timberborn-5.4.19",
+    "Timberborn_Central-TimberAPI-0.5.3.1",
+	"Tobbert-CategoryButton-1.4.1"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "CommonBuildings": [
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeBase.IronTeeth",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle2.IronTeeth",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle4.IronTeeth",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle8.IronTeeth",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeTop1.IronTeeth",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeTop2.IronTeeth"
+  ]
+}

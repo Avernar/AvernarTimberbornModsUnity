@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 1168391038
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: tobbert_categorybutton
+      Dependencies: {}
+    Info_1:
+      Name: tobbert_moreplatforms
+      Dependencies: {}

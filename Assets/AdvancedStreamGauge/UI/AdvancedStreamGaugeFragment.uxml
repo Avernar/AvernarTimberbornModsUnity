@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/AdvancedStreamGaugeStyles.uss?fileID=7433441132597879392&amp;guid=f7020d3c1a458d5498a527f6a042b9f1&amp;type=3#AdvancedStreamGaugeStyles" />
+    <Style src="project://database/Assets/Timberborn/Development.uss?fileID=7433441132597879392&amp;guid=5b6b8cf0b36006a4da234dde71e5e7e2&amp;type=3#Development" />
+    <Timberborn.CoreUI.NineSliceVisualElement name="AdvancedStreamGaugeFragment" class="entity-sub-panel bg-sub-box--green">
+        <ui:Label text="Gauge height:" display-tooltip-when-elided="true" name="GaugeHeightLabel" class="entity-panel__text" />
+        <ui:Label text="Gauge status:" display-tooltip-when-elided="true" name="GaugeStatusLabel" class="entity-panel__text" />
+        <ui:Label text="Water level:" display-tooltip-when-elided="true" enable-rich-text="false" name="WaterLevelLabel" class="entity-panel__text" />
+        <ui:Label text="Highest water level:" display-tooltip-when-elided="true" enable-rich-text="false" name="HighestWaterLevelLabel" class="entity-panel__text" />
+        <ui:Label text="Water current:" display-tooltip-when-elided="true" name="WaterCurrentLabel" enable-rich-text="false" class="entity-panel__text" />
+        <ui:VisualElement name="ButtonContainer" class="content-centered entity-panel__button-wrapper">
+            <Timberborn.CoreUI.LocalizableButton text="Reset" enable-rich-text="false" focusable="false" text-loc-key="Avernar.AdvancedStreamGauge.Reset" name="ResetHighestWaterLevelButton" class="entity-fragment__button entity-fragment__button--red entity-panel__text" style="-unity-slice-left: 10; -unity-slice-top: 10; -unity-slice-right: 10; -unity-slice-bottom: 10;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SettingsContainer" class="entity-panel__settings">
+            <ui:Label text="High set point: " display-tooltip-when-elided="true" enable-rich-text="false" name="HighSetPointLabel" class="entity-panel__text slider-label__spacing" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" name="HighSetPointSlider" show-input-field="false" page-size="1" class="slider" />
+            <ui:Label text="Low set point: " display-tooltip-when-elided="true" enable-rich-text="false" name="LowSetPointLabel" class="entity-panel__text slider-label__spacing" style="height: 17px;" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" name="LowSetPointSlider" show-input-field="false" page-size="1" class="slider" />
+        </ui:VisualElement>
+    </Timberborn.CoreUI.NineSliceVisualElement>
+</ui:UXML>

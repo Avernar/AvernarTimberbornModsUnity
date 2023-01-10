@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4000186225987362137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b243ff405b33b94dbf5b6775dd9aa33, type: 3}
+  m_Name: Files
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>/assets
+  - <ThunderstorePackage>/<ManifestName>/plugins/assets
+  files:
+  - {fileID: 102900000, guid: fae2b689db63c2247bb1877cfe419d2a, type: 3}
+--- !u!114 &-3931462110823901632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22bb7fd1d3b56a48bc52f8e407901d6, type: 3}
+  m_Name: ManifestIdentity
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>
+  Author: Avernar
+  Name: AdvancedStreamGauge
+  Description: Advanced Water Gauge
+  Version: 1.0.0
+  Dependencies: []
+--- !u!114 &-3041366049039997682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b243ff405b33b94dbf5b6775dd9aa33, type: 3}
+  m_Name: Files
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>/Specifications
+  - <ThunderstorePackage>/<ManifestName>/plugins/Specifications
+  files:
+  - {fileID: 4900000, guid: d97f60beedb411048b595ff075e387eb, type: 3}
+  - {fileID: 4900000, guid: eaf3584a96e7fbb40a85fb88daed4a21, type: 3}
+  - {fileID: 4900000, guid: cabcd32aa3d45d54e959c9b7b999cf02, type: 3}
+--- !u!114 &-2863945515051131623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e13dda513544419a89926bd12ad8a, type: 3}
+  m_Name: AssemblyDefinitions
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>
+  - <ThunderstorePackage>/<ManifestName>/plugins
+  definitions:
+  - {fileID: 5897886265953266890, guid: 9f21be8f554a2024c889c7aae384ce7d, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e563561e08b6a3642a487177f5cfbb37, type: 3}
+  m_Name: AdvancedStreamGauge
+  m_EditorClassIdentifier: 
+  Data:
+  - {fileID: -3931462110823901632}
+  - {fileID: -2863945515051131623}
+  - {fileID: 2590189338767857166}
+  - {fileID: 7276679206402820566}
+  - {fileID: -3041366049039997682}
+  - {fileID: 9120418034178625098}
+  - {fileID: -4000186225987362137}
+  identity: {fileID: -3931462110823901632}
+  QuickAccess: 1
+--- !u!114 &2590189338767857166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d1008b78cb6e846889b7778282fbef, type: 3}
+  m_Name: AssetBundleDefinitions
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>/assets
+  - <ThunderstorePackage>/<ManifestName>/plugins/assets
+  assetBundles:
+  - assetBundleName: Avernar_AdvancedStreamGauge
+    assets:
+    - {fileID: 1896028582799526, guid: 6321285585cb570408909c49d49eef9f, type: 3}
+    - {fileID: 1038802021986650, guid: 290613d98866570498e56270ce730e06, type: 3}
+    - {fileID: 1896028582799526, guid: e741e785110141a44b5d9921906d8aa0, type: 3}
+    - {fileID: 1038802021986650, guid: 9855914934a13e947b8d1ad9077b571c, type: 3}
+    - {fileID: 1896028582799526, guid: 02e3f0838f8297d4299a58cfd71193cb, type: 3}
+    - {fileID: 1038802021986650, guid: 1a3da3e83dab785448e104418ac98e07, type: 3}
+    - {fileID: 1896028582799526, guid: 1de49e324ed6cba4ca3ebd444b594f75, type: 3}
+    - {fileID: 1038802021986650, guid: bcfa4be7acda9ee49b1ebd78081c145b, type: 3}
+    - {fileID: 1896028582799526, guid: 979f01c8789e23544b255e74be3f617d, type: 3}
+    - {fileID: 1038802021986650, guid: ad5c055ac91aed54a852ea765a928931, type: 3}
+    - {fileID: 1896028582799526, guid: 8cd33e772a582ef4cb23eb18625f0478, type: 3}
+    - {fileID: 1038802021986650, guid: ac73131682c803740a40af1753d8eb6b, type: 3}
+    - {fileID: 1038802021986650, guid: ac73131682c803740a40af1753d8eb6b, type: 3}
+    - {fileID: 9197481963319205126, guid: d29907c2e7bd626478b9e54373be6125, type: 3}
+    - {fileID: 7433441132597879392, guid: f7020d3c1a458d5498a527f6a042b9f1, type: 3}
+--- !u!114 &5729492037857871639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e13dda513544419a89926bd12ad8a, type: 3}
+  m_Name: AssemblyDefinitions
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>
+  - <ThunderstorePackage>/<ManifestName>/plugins
+  definitions:
+  - {fileID: 5897886265953266890, guid: b96f43e9fa5dc0d4c95b44e7e1eb7a94, type: 3}
+--- !u!114 &7276679206402820566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b243ff405b33b94dbf5b6775dd9aa33, type: 3}
+  m_Name: Files
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ThunderstorePackage>
+  files:
+  - {fileID: 2800000, guid: c63aa7578994b1940b466ed09845eaf4, type: 3}
+  - {fileID: 4900000, guid: 40b349f4af7a79644860dc5ac5386ec9, type: 3}
+  - {fileID: 4900000, guid: f8e512711a89d424fa15ac8b0e21ba4e, type: 3}
+--- !u!114 &9120418034178625098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b243ff405b33b94dbf5b6775dd9aa33, type: 3}
+  m_Name: Files
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <ManifestPluginStaging>
+  - <ThunderstorePackage>/<ManifestName>/plugins
+  files:
+  - {fileID: 102900000, guid: 9e255c39f8b4f1742aee0ae5d8d3b30f, type: 3}
+  - {fileID: 4900000, guid: a8ebbffccf051674aa6fa1eb350ba8e4, type: 3}

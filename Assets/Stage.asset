@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 114537630434205182}
   - {fileID: 114366308522735304}
   QuickAccess: 0
-  manifest: {fileID: 11400000, guid: a5890e1ec3cc3064bbf76ae9a068cbd3, type: 2}
+  manifest: {fileID: 11400000, guid: dd5454b0bf0938b4fac8b8670c261f37, type: 2}
 --- !u!114 &114366308522735304
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -29,7 +29,7 @@
       "dependencies": {}
     },
     "com.unity.collab-proxy": {
-      "version": "1.17.2",
+      "version": "1.17.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -202,12 +202,6 @@
     },
     "timberborn": {
       "version": "file:Timberborn",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
-    "timberborn_central-timberapi": {
-      "version": "file:TimberAPI",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

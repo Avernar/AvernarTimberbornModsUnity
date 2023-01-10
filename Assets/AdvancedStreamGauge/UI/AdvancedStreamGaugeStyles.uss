@@ -1,0 +1,7 @@
+.entity-panel__settings {
+    margin-top: 8px;
+}
+
+.slider-label__spacing {
+    margin-top: 10px;
+}

@@ -1,0 +1,10 @@
+{
+  "CommonBuildings": [
+    "avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeBase.Folktails",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle2.Folktails",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle4.Folktails",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeMiddle8.Folktails",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeTop1.Folktails",
+	"avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeTop2.Folktails"
+  ]
+}
