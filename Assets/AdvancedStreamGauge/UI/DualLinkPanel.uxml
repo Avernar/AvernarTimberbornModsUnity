@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="LinkPanel" src="project://database/Assets/AdvancedStreamGauge/UI/LinkPanel.uxml?fileID=9197481963319205126&amp;guid=dc463ae982df3b5409f88d6a785445e0&amp;type=3#LinkPanel" />
+    <ui:VisualElement name="DualLinkPanel" class="avernar content-centered">
+        <ui:Instance template="LinkPanel" name="LinkPanel1" />
+        <ui:Instance template="LinkPanel" name="LinkPanel2" class="top-margin" />
+    </ui:VisualElement>
+</ui:UXML>

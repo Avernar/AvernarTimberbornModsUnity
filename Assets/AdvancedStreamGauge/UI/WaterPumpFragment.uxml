@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DualLinkPanel" src="project://database/Assets/AdvancedStreamGauge/UI/DualLinkPanel.uxml?fileID=9197481963319205126&amp;guid=5162ec1f275699248afc348b7d291342&amp;type=3#DualLinkPanel" />
+    <ui:Template name="WeatherActions" src="project://database/Assets/AdvancedStreamGauge/UI/WeatherActions.uxml?fileID=9197481963319205126&amp;guid=85c9bf312d3b51745bd858e87188b164&amp;type=3#WeatherActions" />
+    <ui:Template name="GaugeSettings" src="project://database/Assets/AdvancedStreamGauge/UI/GaugeSettings.uxml?fileID=9197481963319205126&amp;guid=65ca876f5b3ed48409b55c254ca2829a&amp;type=3#GaugeSettings" />
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/AdvancedStreamGaugeStyles.uss?fileID=7433441132597879392&amp;guid=f7020d3c1a458d5498a527f6a042b9f1&amp;type=3#AdvancedStreamGaugeStyles" />
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/Development.uss?fileID=7433441132597879392&amp;guid=5b6b8cf0b36006a4da234dde71e5e7e2&amp;type=3#Development" />
+    <Timberborn.CoreUI.NineSliceVisualElement name="PumpFragment" class="entity-sub-panel bg-sub-box--green entity-panel__text small-radio-buttons">
+        <ui:VisualElement class="content-centered">
+            <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text-loc-key="Avernar.AdvancedStreamGauge.Controls" text="Advanced Stream Gauge Controls&#x9;" class="entity-panel__heading" />
+        </ui:VisualElement>
+        <ui:Instance template="DualLinkPanel" name="DualLinkPanel" class="top-margin" />
+        <ui:Instance template="WeatherActions" name="WeatherActions" class="top-margin-big" />
+        <ui:VisualElement class="top-margin-big">
+            <ui:Instance template="GaugeSettings" name="FirstGaugeSettings" />
+            <ui:VisualElement class="content-centered top-margin avernar">
+                <ui:VisualElement class="horizontal">
+                    <ui:RadioButtonGroup value="-1" name="AndOr" choices="And,Or" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Instance template="GaugeSettings" name="SecondGaugeSettings" />
+        </ui:VisualElement>
+    </Timberborn.CoreUI.NineSliceVisualElement>
+</ui:UXML>

@@ -49,10 +49,10 @@ crashlytics-build.properties
 
 #Timberborn Files
 .*
-Packages/Timberborn/*
-Assets/Timberborn/*
-Assets/Timberborn
-ThunderKit/*
-UserSettings/*
-Assets/ThunderKitSettings/ThunderKitSettings.asset
-ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+/Packages/Timberborn
+/Assets/Timberborn
+/ThunderKit
+/UserSettings
+/Assets/ThunderKitSettings/ThunderKitSettings.asset
+/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+/UIElementsSchema

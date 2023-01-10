@@ -1,5 +1,5 @@
 ID,Text,Comment
-Avernar.CategoryAdvancedStreamGauge.DisplayName,Advanced Stream Gauge,-
+Avernar.AdvancedStreamGauge.DisplayName,Advanced Stream Gauge,-
 Avernar.AdvancedStreamGaugeBase.DisplayName,Advanced Stream Gauge Base,-
 Avernar.AdvancedStreamGaugeMiddle2.DisplayName,Advanced Stream Gauge Middle 2,-
 Avernar.AdvancedStreamGaugeMiddle4.DisplayName,Advanced Stream Gauge Middle 4,-
@@ -26,9 +26,35 @@ Avernar.AdvancedStreamGauge.Reset,Reset,-
 Avernar.AdvancedStreamGauge.Incomplete,Incomplete,-
 Avernar.AdvancedStreamGauge.Dry,Dry,-
 Avernar.AdvancedStreamGauge.Low,Low,-
-Avernar.AdvancedStreamGauge.NormalWasHigh,Normal (Was High),-
-Avernar.AdvancedStreamGauge.NormalWasLow,Normal (Was Low),-
+Avernar.AdvancedStreamGauge.NormalWasHigh,Normal was High,-
+Avernar.AdvancedStreamGauge.NormalWasLow,Normal was Low,-
 Avernar.AdvancedStreamGauge.High,High,-
 Avernar.AdvancedStreamGauge.Overflow,Overflow,-
 Avernar.AdvancedStreamGauge.HighSetPoint,High set point: {0},-
 Avernar.AdvancedStreamGauge.LowSetPoint,Low set point: {0},-
+Avernar.AdvancedStreamGauge.Controls,Advanced Stream Gauge Controls,-
+Avernar.AdvancedStreamGauge.Link,Link
+Avernar.AdvancedStreamGauge.StartLinkingTitle,Advanced Stream Gauge Linker
+Avernar.AdvancedStreamGauge.StartLinkingTip,Pick an advanced stream gauge to link to the building.
+Avernar.AdvancedStreamGauge.TemperateLabel,Temperate:
+Avernar.AdvancedStreamGauge.DroughtLabel,Drought:
+Avernar.AdvancedStreamGauge.DryLabel,Dry:
+Avernar.AdvancedStreamGauge.LowLabel,Low:
+Avernar.AdvancedStreamGauge.NormalWasHighLabel,Normal was High:
+Avernar.AdvancedStreamGauge.NormalWasLowLabel,Normal was Low:
+Avernar.AdvancedStreamGauge.HighLabel,High:
+Avernar.AdvancedStreamGauge.OverflowLabel,Overflow:
+Avernar.AdvancedStreamGauge.And,And
+Avernar.AdvancedStreamGauge.Or,Or
+Avernar.AdvancedStreamGauge.Off,Off
+Avernar.AdvancedStreamGauge.On,On
+Avernar.AdvancedStreamGauge.Gauge,Gauge
+Avernar.AdvancedStreamGauge.LinkText,Level: {0} ({1})
+Avernar.AdvancedStreamGauge.Close,Close
+Avernar.AdvancedStreamGauge.Open,Open
+Avernar.AdvancedStreamGauge.Closed,Closed: {0}
+Avernar.AdvancedStreamGauge.Opened,Opened: {0}
+Avernar.AdvancedStreamGauge.ControlGauge,Control Gauge:
+Avernar.AdvancedStreamGauge.SlowOpenGauge,Slow Open Gauge:
+Avernar.AdvancedStreamGauge.Automatic,Automatic
+Avernar.AdvancedStreamGauge.Manual,Manual

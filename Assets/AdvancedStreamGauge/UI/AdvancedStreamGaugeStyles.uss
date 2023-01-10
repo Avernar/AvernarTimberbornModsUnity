@@ -1,7 +1,153 @@
+.entity-panel__heading {
+    color: rgb(204, 204, 204);
+    font-size: 16px;
+    white-space: normal;
+}
+
 .entity-panel__settings {
     margin-top: 8px;
 }
 
 .slider-label__spacing {
     margin-top: 10px;
+}
+
+.top-margin {
+	margin-top: 6px;
+}
+
+.bottom-margin {
+	margin-bottom: 5px;
+}
+
+.spacer {
+	margin-bottom: 5px;
+}
+
+.top-margin-big {
+	margin-top: 8px;
+}
+
+.top-margin-huge {
+	margin-top: 16px;
+}
+
+.horizontal .unity-label {
+	font-size: 14px;
+	margin-top: 1px;
+	margin-bottom: 0px;
+}
+
+.small-radio-buttons .unity-radio-button {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.small-radio-buttons .unity-radio-button__checkmark-background {
+    background-image: url('project://database/Assets/Timberborn/ui/images/buttons/circle-off.png?fileID=2800000&guid=b4b0220449a572140a67859a9056ab50&type=3#circle-off');
+    margin: 4px;
+	
+	padding-top: 5px;
+	width: 14px;
+	height: 14px;
+	border-radius: 12px;
+	background-color: rgb(240, 240, 240);
+	border-width: 1px;
+	border-color: rgb(100, 100, 100);
+	flex: 0 0 auto;
+	align-self: center;
+}
+
+.small-radio-buttons .unity-radio-button.:disabled .unity-radio-button__checkmark-background {
+  background-color: rgb(149, 149, 149);
+  border-color: rgb(126, 126, 126);
+}
+
+.small-radio-buttons .unity-radio-button__input:enabled:hover .unity-radio-button__checkmark-background {
+    background-image: url('project://database/Assets/Timberborn/ui/images/buttons/circle-hover.png?fileID=2800000&guid=11e3ae15e28c9fa498884e365e373d47&type=3#circle-hover');
+    margin: 4px;
+	width: 14px;
+	height: 14px;
+}
+
+.small-radio-buttons .unity-radio-button__input:enabled:checked .unity-radio-button__checkmark-background {
+    background-image: url('project://database/Assets/Timberborn/ui/images/buttons/circle-on.png?fileID=2800000&guid=a4c68ca559bc3d0459e3c7a781732693&type=3#circle-on');
+    margin: 4px;
+	width: 14px;
+	height: 14px;
+}
+
+.small-radio-buttons .unity-radio-button__checkmark {
+	width: 0px;
+	height: 0px;
+}
+
+.small-radio-buttons .unity-radio-button.:disabled .unity-radio-button__checkmark {
+}
+
+.small-radio-buttons .unity-radio-button__text {
+    font-size: 14px;
+    color: rgb(204, 204, 204);
+    white-space: normal;
+}
+
+.small-radio-buttons .unity-radio-button__input:enabled:checked .unity-radio-button__text {
+    color: rgb(255, 255, 255);
+}
+
+.horizontal {
+	flex-direction: row;
+	margin-bottom: 0px;
+}
+
+.horizontal .unity-radio-button-group .unity-base-field__input {
+	flex-direction: row;
+}
+
+.horizontal .unity-radio-button-group {
+	margin-left: auto;
+}
+
+.link-button {
+	height: 30px;
+}
+
+.link-target {
+    font-size: 14px;
+	color: rgb(204, 204, 204);
+	-unity-font-style: normal;
+	height: 30px;
+	width: 290px;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+
+.link-target-content-container {
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.link-target-content {
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.link-target-image-container {
+	width: 28px;
+	height: 28px;
+	margin: 1px 0 0 6px;
+}
+
+.link-target-text {
+	-unity-text-align: middle-left;
+	padding-left: 3px;
+}
+
+.link-target-remove-button {
+	background-color: rgba(0, 0, 0, 0);
+	margin: 1px 2px 0 auto;
 }

@@ -2,7 +2,7 @@
   "Name": "CategoryAdvancedStreamGauge",
   "ToolGroup": "Water",
   "ToolOrder": 300,
-  "ButtonIcon": "CategoryAdvancedStreamGaugeIcon.png",
+  "ButtonIcon": "AdvancedStreamGaugeIcon.png",
   "Buildings": [
 	"AdvancedStreamGaugeBase.Folktails",
 	"AdvancedStreamGaugeMiddle2.Folktails",
@@ -17,5 +17,5 @@
 	"AdvancedStreamGaugeTop1.IronTeeth",
 	"AdvancedStreamGaugeTop2.IronTeeth"
   ],
-  "DisplayNameLocKey": "Avernar.CategoryAdvancedStreamGauge.DisplayName"
+  "DisplayNameLocKey": "Avernar.AdvancedStreamGauge.DisplayName"
 }

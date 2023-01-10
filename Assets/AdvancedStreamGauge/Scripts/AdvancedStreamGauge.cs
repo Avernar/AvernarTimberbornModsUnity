@@ -1,19 +1,16 @@
 using UnityEngine;
 using Bindito.Core;
-using HarmonyLib;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Collections.ObjectModel;
 using Timberborn.Common;
 using Timberborn.BlockSystem;
 using Timberborn.TickSystem;
 using Timberborn.ConstructibleSystem;
+using Timberborn.EntitySystem;
 
-
-namespace Avernar.Gauge
-{
-    public class AdvancedStreamGauge : TickableComponent, IFinishedStateListener
+namespace Avernar.Gauge {
+    public class AdvancedStreamGauge : TickableComponent, IFinishedStateListener, IRegisteredComponent
     {
         protected BlockObject _blockObject;
         protected Vector2Int _coordinates;
@@ -101,6 +98,5 @@ namespace Avernar.Gauge
         }
 
         protected Vector2Int GetCoordinatesXY() => this._blockObject.PositionedBlocks.GetOccupiedCoordinates().Select<Vector3Int, Vector2Int>((Func<Vector3Int, Vector2Int>)(coords => coords.XY())).Distinct<Vector2Int>().First<Vector2Int>();
-
     }
 }

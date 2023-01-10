@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="WeatherActions" src="project://database/Assets/AdvancedStreamGauge/UI/WeatherActions.uxml?fileID=9197481963319205126&amp;guid=85c9bf312d3b51745bd858e87188b164&amp;type=3#WeatherActions" />
+    <ui:Template name="LinkPanel" src="project://database/Assets/AdvancedStreamGauge/UI/LinkPanel.uxml?fileID=9197481963319205126&amp;guid=dc463ae982df3b5409f88d6a785445e0&amp;type=3#LinkPanel" />
+    <ui:Template name="GaugeSettings" src="project://database/Assets/AdvancedStreamGauge/UI/GaugeSettings.uxml?fileID=9197481963319205126&amp;guid=65ca876f5b3ed48409b55c254ca2829a&amp;type=3#GaugeSettings" />
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/AdvancedStreamGaugeStyles.uss?fileID=7433441132597879392&amp;guid=f7020d3c1a458d5498a527f6a042b9f1&amp;type=3#AdvancedStreamGaugeStyles" />
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/Development.uss?fileID=7433441132597879392&amp;guid=5b6b8cf0b36006a4da234dde71e5e7e2&amp;type=3#Development" />
+    <Timberborn.CoreUI.NineSliceVisualElement name="FloodgateFragment" class="entity-sub-panel bg-sub-box--green entity-panel__text small-radio-buttons">
+        <ui:VisualElement class="content-centered">
+            <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text-loc-key="Avernar.AdvancedStreamGauge.Controls" text="Advanced Stream Gauge Controls&#x9;" class="entity-panel__heading" />
+        </ui:VisualElement>
+        <ui:VisualElement class="content-centered top-margin avernar">
+            <ui:VisualElement class="horizontal">
+                <ui:RadioButtonGroup value="-1" name="ManualAutomatic" choices="Manual,Automatic" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="SettingsContainer" class="bottom-margin top-margin-big">
+            <ui:Label text="Closed: " display-tooltip-when-elided="true" enable-rich-text="false" name="ClosedLabel" class="entity-panel__text" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" name="ClosedSlider" show-input-field="false" page-size="1" class="slider" />
+            <ui:Label text="Opened: " display-tooltip-when-elided="true" enable-rich-text="false" name="OpenedLabel" class="entity-panel__text slider-label__spacing" />
+            <ui:Slider picking-mode="Ignore" value="0" high-value="0" name="OpenedSlider" show-input-field="false" page-size="1" class="slider" />
+        </ui:VisualElement>
+        <ui:VisualElement />
+        <ui:Instance template="WeatherActions" name="WeatherActions" class="top-margin-big" />
+        <ui:VisualElement class="top-margin-big">
+            <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text="Control Gauge:" text-loc-key="Avernar.AdvancedStreamGauge.ControlGauge" class="entity-panel__text top-margin-big" />
+            <ui:Instance template="LinkPanel" name="LinkPanel1" class="top-margin" />
+        </ui:VisualElement>
+        <ui:Instance template="GaugeSettings" name="FirstGaugeSettings" class="top-margin-big" />
+        <ui:VisualElement class="top-margin-big">
+            <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text="Slow Open Gauge:" text-loc-key="Avernar.AdvancedStreamGauge.SlowOpenGauge" class="entity-panel__text top-margin-big" />
+            <ui:Instance template="LinkPanel" name="LinkPanel2" class="top-margin" />
+        </ui:VisualElement>
+    </Timberborn.CoreUI.NineSliceVisualElement>
+</ui:UXML>

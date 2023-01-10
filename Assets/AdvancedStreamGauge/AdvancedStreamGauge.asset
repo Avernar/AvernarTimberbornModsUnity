@@ -34,7 +34,7 @@ MonoBehaviour:
   Author: Avernar
   Name: AdvancedStreamGauge
   Description: Advanced Water Gauge
-  Version: 1.0.0
+  Version: 1.1.0
   Dependencies: []
 --- !u!114 &-3041366049039997682
 MonoBehaviour:
@@ -125,8 +125,11 @@ MonoBehaviour:
     - {fileID: 1896028582799526, guid: 8cd33e772a582ef4cb23eb18625f0478, type: 3}
     - {fileID: 1038802021986650, guid: ac73131682c803740a40af1753d8eb6b, type: 3}
     - {fileID: 1038802021986650, guid: ac73131682c803740a40af1753d8eb6b, type: 3}
-    - {fileID: 9197481963319205126, guid: d29907c2e7bd626478b9e54373be6125, type: 3}
+    - {fileID: 2800000, guid: 928d6e542b13cbd42b872e6edf773a1e, type: 3}
     - {fileID: 7433441132597879392, guid: f7020d3c1a458d5498a527f6a042b9f1, type: 3}
+    - {fileID: 9197481963319205126, guid: d29907c2e7bd626478b9e54373be6125, type: 3}
+    - {fileID: 9197481963319205126, guid: 250bc8ae3eb84f24d859b8b4ea9842cc, type: 3}
+    - {fileID: 9197481963319205126, guid: 99b868b912dee884caa9f0bbb57bb4cc, type: 3}
 --- !u!114 &5729492037857871639
 MonoBehaviour:
   m_ObjectHideFlags: 0

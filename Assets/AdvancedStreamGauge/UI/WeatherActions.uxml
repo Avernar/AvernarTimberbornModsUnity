@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/AdvancedStreamGaugeStyles.uss?fileID=7433441132597879392&amp;guid=f7020d3c1a458d5498a527f6a042b9f1&amp;type=3#AdvancedStreamGaugeStyles" />
+    <Style src="project://database/Assets/AdvancedStreamGauge/UI/Development.uss?fileID=7433441132597879392&amp;guid=5b6b8cf0b36006a4da234dde71e5e7e2&amp;type=3#Development" />
+    <ui:VisualElement class="small-radio-buttons">
+        <ui:VisualElement class="horizontal">
+            <Timberborn.CoreUI.LocalizableLabel text="Temperate:" text-loc-key="Avernar.AdvancedStreamGauge.TemperateLabel" />
+            <ui:RadioButtonGroup value="-1" name="Temperate" choices="Off,On,Gauge" />
+        </ui:VisualElement>
+        <ui:VisualElement class="horizontal">
+            <Timberborn.CoreUI.LocalizableLabel text="Drought:" text-loc-key="Avernar.AdvancedStreamGauge.DroughtLabel" />
+            <ui:RadioButtonGroup value="-1" name="Drought" choices="Off,On,Gauge" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
