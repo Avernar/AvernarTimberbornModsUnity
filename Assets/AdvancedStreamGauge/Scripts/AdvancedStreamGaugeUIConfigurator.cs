@@ -8,17 +8,17 @@ namespace Avernar.Gauge {
     public class AdvancedStreamGaugeUIConfigurator : IConfigurator {
         public void Configure(IContainerDefinition containerDefinition) {
             containerDefinition.Bind<AdvancedStreamGaugeFragment>().AsSingleton();
-            containerDefinition.Bind<FloodgateFragment>().AsSingleton();
-            containerDefinition.Bind<WaterPumpFragment>().AsSingleton();
+            containerDefinition.Bind<ASGFloodgateFragment>().AsSingleton();
+            containerDefinition.Bind<ASGWaterPumpFragment>().AsSingleton();
             containerDefinition.MultiBind<EntityPanelModule>().ToProvider<AdvancedStreamGaugeUIConfigurator.EntityPanelModuleProvider>().AsSingleton();
         }
 
         private class EntityPanelModuleProvider : IProvider<EntityPanelModule> {
             private readonly AdvancedStreamGaugeFragment _advancedStreamGaugeFragment;
-            private readonly FloodgateFragment _floodgateFragment;
-            private readonly WaterPumpFragment _waterPumpFragment;
+            private readonly ASGFloodgateFragment _floodgateFragment;
+            private readonly ASGWaterPumpFragment _waterPumpFragment;
 
-            public EntityPanelModuleProvider(AdvancedStreamGaugeFragment streamGaugeFragment, FloodgateFragment floodgateFragment, WaterPumpFragment waterPumpFragment) {
+            public EntityPanelModuleProvider(AdvancedStreamGaugeFragment streamGaugeFragment, ASGFloodgateFragment floodgateFragment, ASGWaterPumpFragment waterPumpFragment) {
                 this._advancedStreamGaugeFragment = streamGaugeFragment;
                 this._floodgateFragment = floodgateFragment;
                 this._waterPumpFragment = waterPumpFragment;

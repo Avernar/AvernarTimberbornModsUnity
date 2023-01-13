@@ -12,7 +12,9 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 
 namespace Avernar.Gauge {
-    internal class WaterPumpFragment : IEntityPanelFragment {
+    internal class ASGWaterPumpFragment : IEntityPanelFragment {
+        private static readonly string ManualKey = "Avernar.AdvancedStreamGauge.Manual";
+        private static readonly string AutomaticKey = "Avernar.AdvancedStreamGauge.Automatic";
         private static readonly string AndLocKey = "Avernar.AdvancedStreamGauge.And";
         private static readonly string OrLocKey = "Avernar.AdvancedStreamGauge.Or";
         private readonly ILoc _loc;
@@ -22,13 +24,19 @@ namespace Avernar.Gauge {
         private readonly WeatherActionsFragment _weatherActionsFragment;
         private readonly GaugeConfigFragment _waterPumpConfigFragment1;
         private readonly GaugeConfigFragment _waterPumpConfigFragment2;
+        private readonly List<string> _manualAutomaticOptions = new();
         private readonly List<string> _andOrOptions = new();
         private UIBuilder _timberApiUiBuilder;
         private VisualElement _root;
+        private RadioButtonGroup _manualAutomatic;
+        private VisualElement _automaticSettings;
+        private TemplateContainer _firstGaugeSettings;
+        private TemplateContainer _secondGaugeSettings;
+        private VisualElement _andOrSettings;
         private RadioButtonGroup _andOr;
         private WaterPumpMonobehaviour _waterPump;
 
-        public WaterPumpFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
+        public ASGWaterPumpFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
             this._loc = loc;
             this._assetLoader = assetLoader;
             this._linkPanelFragment1 = new LinkPanelFragment(loc, assetLoader, pickObjectTool, selectionManager);
@@ -36,6 +44,8 @@ namespace Avernar.Gauge {
             this._weatherActionsFragment = new WeatherActionsFragment(loc);
             this._waterPumpConfigFragment1 = new GaugeConfigFragment(loc);
             this._waterPumpConfigFragment2 = new GaugeConfigFragment(loc);
+            this._manualAutomaticOptions.Add(_loc.T(ManualKey));
+            this._manualAutomaticOptions.Add(_loc.T(AutomaticKey));
             this._andOrOptions.Add(_loc.T(AndLocKey));
             this._andOrOptions.Add(_loc.T(OrLocKey));
         }
@@ -54,6 +64,12 @@ namespace Avernar.Gauge {
 
             this._root.ToggleDisplayStyle(false);
 
+            this._manualAutomatic = this._root.Q<RadioButtonGroup>("ManualAutomatic", (string)null);
+            this._manualAutomatic.choices = this._manualAutomaticOptions;
+            this._manualAutomatic.RegisterValueChangedCallback(ManualAutomaticChanged);
+
+            this._automaticSettings = this._root.Q<VisualElement>("AutomaticSettings", (string)null);
+
             VisualElement linkPanel1 = this._root.Q<VisualElement>("LinkPanel1", (string)null);
             this._linkPanelFragment1.Initialize<AdvancedStreamGauge>(linkPanel1, delegate(EntityLinker linker, EntityLinker linkee) {
                 linker.GetComponent<WaterPumpMonobehaviour>().FirstLink = linkee;
@@ -67,17 +83,23 @@ namespace Avernar.Gauge {
             TemplateContainer weatherActions = this._root.Q<TemplateContainer>("WeatherActions", (string)null);
             this._weatherActionsFragment.InitializeFragment(weatherActions);
 
-            TemplateContainer firstGaugeSettings = this._root.Q<TemplateContainer>("FirstGaugeSettings", (string)null);
-            this._waterPumpConfigFragment1.InitializeFragment(firstGaugeSettings);
+            this._firstGaugeSettings = this._root.Q<TemplateContainer>("FirstGaugeSettings", (string)null);
+            this._waterPumpConfigFragment1.InitializeFragment(this._firstGaugeSettings);
 
-            TemplateContainer secondGaugeSettings = this._root.Q<TemplateContainer>("SecondGaugeSettings", (string)null);
-            this._waterPumpConfigFragment2.InitializeFragment(secondGaugeSettings);
+            this._secondGaugeSettings = this._root.Q<TemplateContainer>("SecondGaugeSettings", (string)null);
+            this._waterPumpConfigFragment2.InitializeFragment(this._secondGaugeSettings);
+
+            this._andOrSettings = this._root.Q<VisualElement>("AndOrSettings", (string)null);
 
             this._andOr = this._root.Q<RadioButtonGroup>("AndOr", (string)null);
             this._andOr.choices = this._andOrOptions;
             this._andOr.RegisterValueChangedCallback(AndOrChanged);
 
             return this._root;
+        }
+
+        private void ManualAutomaticChanged(ChangeEvent<int> e) {
+            this._waterPump.Automatic = e.newValue == 1;
         }
 
         private void AndOrChanged(ChangeEvent<int> e) {
@@ -88,12 +110,18 @@ namespace Avernar.Gauge {
             this._waterPump = entity.GetComponent<WaterPumpMonobehaviour>();
             if ((bool)(UnityEngine.Object)this._waterPump) {
                 EntityLinker linker = entity.GetComponent<EntityLinker>();
+                this._manualAutomatic.SetValueWithoutNotify(this._waterPump.Automatic ? 1 : 0);
                 this._linkPanelFragment1.ShowFragment(linker, this._waterPump.FirstLink);
                 this._linkPanelFragment2.ShowFragment(linker, this._waterPump.SecondLink);
                 this._weatherActionsFragment.ShowFragment(this._waterPump.Actions);
                 this._waterPumpConfigFragment1.ShowFragment(this._waterPump.Gauge1);
                 this._waterPumpConfigFragment2.ShowFragment(this._waterPump.Gauge2);
                 this._andOr.SetValueWithoutNotify(this._waterPump.Or ? 1 : 0);
+
+                this._automaticSettings.ToggleDisplayStyle(this._waterPump.Automatic);
+                this._firstGaugeSettings.ToggleDisplayStyle((bool)this._waterPump.FirstLink);
+                this._andOrSettings.ToggleDisplayStyle((bool)this._waterPump.FirstLink && (bool)this._waterPump.SecondLink);
+                this._secondGaugeSettings.ToggleDisplayStyle((bool)this._waterPump.SecondLink);
                 this._root.ToggleDisplayStyle(true);
             }
         }
@@ -110,10 +138,14 @@ namespace Avernar.Gauge {
         }
 
         public void UpdateFragment() {
-            if ((bool)(UnityEngine.Object)this._waterPump && this._waterPump.enabled) {
+            if ((bool)(UnityEngine.Object)this._waterPump) {
                 this._root.ToggleDisplayStyle(true);
                 this._linkPanelFragment1.UpdateFragment();
                 this._linkPanelFragment2.UpdateFragment();
+                this._automaticSettings.ToggleDisplayStyle(this._waterPump.Automatic);
+                this._firstGaugeSettings.ToggleDisplayStyle((bool)this._waterPump.FirstLink);
+                this._andOrSettings.ToggleDisplayStyle((bool)this._waterPump.FirstLink && (bool)this._waterPump.SecondLink);
+                this._secondGaugeSettings.ToggleDisplayStyle((bool)this._waterPump.SecondLink);
             }
             else {
                 this._root.ToggleDisplayStyle(false);

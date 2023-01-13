@@ -8,16 +8,23 @@
         <ui:VisualElement class="content-centered">
             <Timberborn.CoreUI.LocalizableLabel enable-rich-text="false" text-loc-key="Avernar.AdvancedStreamGauge.Controls" text="Advanced Stream Gauge Controls&#x9;" class="entity-panel__heading" />
         </ui:VisualElement>
-        <ui:Instance template="DualLinkPanel" name="DualLinkPanel" class="top-margin" />
-        <ui:Instance template="WeatherActions" name="WeatherActions" class="top-margin-big" />
-        <ui:VisualElement class="top-margin-big">
-            <ui:Instance template="GaugeSettings" name="FirstGaugeSettings" />
-            <ui:VisualElement class="content-centered top-margin avernar">
-                <ui:VisualElement class="horizontal">
-                    <ui:RadioButtonGroup value="-1" name="AndOr" choices="And,Or" />
-                </ui:VisualElement>
+        <ui:VisualElement class="content-centered top-margin avernar">
+            <ui:VisualElement class="horizontal">
+                <ui:RadioButtonGroup value="0" name="ManualAutomatic" choices="Manual,Automatic" />
             </ui:VisualElement>
-            <ui:Instance template="GaugeSettings" name="SecondGaugeSettings" />
+        </ui:VisualElement>
+        <ui:VisualElement name="AutomaticSettings">
+            <ui:Instance template="DualLinkPanel" name="DualLinkPanel" class="top-margin top-margine" />
+            <ui:Instance template="WeatherActions" name="WeatherActions" class="top-margin-big" />
+            <ui:VisualElement class="top-margin-big">
+                <ui:Instance template="GaugeSettings" name="FirstGaugeSettings" />
+                <ui:VisualElement name="AndOrSettings" class="content-centered top-margin avernar">
+                    <ui:VisualElement class="horizontal">
+                        <ui:RadioButtonGroup value="-1" name="AndOr" choices="And,Or" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Instance template="GaugeSettings" name="SecondGaugeSettings" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </Timberborn.CoreUI.NineSliceVisualElement>
 </ui:UXML>

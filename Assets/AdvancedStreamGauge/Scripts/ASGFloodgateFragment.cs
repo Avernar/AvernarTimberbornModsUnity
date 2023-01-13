@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 
 namespace Avernar.Gauge {
-    internal class FloodgateFragment : Fragment, IEntityPanelFragment {
+    internal class ASGFloodgateFragment : Fragment, IEntityPanelFragment {
         private static readonly string ManualKey = "Avernar.AdvancedStreamGauge.Manual";
         private static readonly string AutomaticKey = "Avernar.AdvancedStreamGauge.Automatic";
         private static readonly string OffLocKey = "Avernar.AdvancedStreamGauge.Off";
@@ -31,14 +31,18 @@ namespace Avernar.Gauge {
         private UIBuilder _timberApiUiBuilder;
         private VisualElement _root;
         private RadioButtonGroup _manualAutomatic;
+        private VisualElement _automaticSettings;
+        private TemplateContainer _firstGaugeSettings;
+        private VisualElement _secondGaugeSettings;
         private RadioButtonGroup _backflowPrevention;
         private Label _closedLabel;
         private Label _openedLabel;
         private Slider _closedSlider;
         private Slider _openedSlider;
         private FloodgateMonobehaviour _floodgate;
+        private Slider _slider;
 
-        public FloodgateFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
+        public ASGFloodgateFragment(ILoc loc, IResourceAssetLoader assetLoader, PickObjectTool pickObjectTool, SelectionManager selectionManager) {
             this._loc = loc;
             this._assetLoader = assetLoader;
             this._linkPanelFragment1 = new LinkPanelFragment(loc, assetLoader, pickObjectTool, selectionManager);
@@ -69,6 +73,8 @@ namespace Avernar.Gauge {
             this._manualAutomatic.choices = this._manualAutomaticOptions;
             this._manualAutomatic.RegisterValueChangedCallback(ManualAutomaticChanged);
 
+            this._automaticSettings = this._root.Q<VisualElement>("AutomaticSettings", (string)null);
+
             this._backflowPrevention = this._root.Q<RadioButtonGroup>("BackflowPrevention", (string)null);
             this._backflowPrevention.choices = this._offOnOptions;
             this._backflowPrevention.RegisterValueChangedCallback(BackflowPreventionChanged);
@@ -97,8 +103,10 @@ namespace Avernar.Gauge {
             TemplateContainer weatherActions = this._root.Q<TemplateContainer>("WeatherActions", (string)null);
             this._weatherActionsFragment.InitializeFragment(weatherActions);
 
-            TemplateContainer firstGaugeSettings = this._root.Q<TemplateContainer>("FirstGaugeSettings", (string)null);
-            this._waterPumpConfigFragment1.InitializeFragment(firstGaugeSettings);
+            this._firstGaugeSettings = this._root.Q<TemplateContainer>("FirstGaugeSettings", (string)null);
+            this._waterPumpConfigFragment1.InitializeFragment(this._firstGaugeSettings);
+
+            this._secondGaugeSettings = this._root.Q<VisualElement>("SecondGaugeSettings", (string)null);
 
             return this._root;
         }
@@ -114,11 +122,11 @@ namespace Avernar.Gauge {
             this._floodgate = entity.GetComponent<FloodgateMonobehaviour>();
             if ((bool)(UnityEngine.Object)this._floodgate) {
                 EntityLinker linker = entity.GetComponent<EntityLinker>();
+                this._manualAutomatic.SetValueWithoutNotify(this._floodgate.Automatic ? 1 : 0);
                 this._linkPanelFragment1.ShowFragment(linker, this._floodgate.FirstLink, this._floodgate.SecondLink);
                 this._linkPanelFragment2.ShowFragment(linker, this._floodgate.SecondLink, this._floodgate.FirstLink);
                 this._weatherActionsFragment.ShowFragment(this._floodgate.Actions);
                 this._waterPumpConfigFragment1.ShowFragment(this._floodgate.Gauge1);
-                this._manualAutomatic.SetValueWithoutNotify(this._floodgate.Automatic ? 1 : 0);
 
                 this._closedSlider.SetValueWithoutNotify(0);
                 this._closedSlider.highValue = this._floodgate.FloodgateMaxHeight;
@@ -130,6 +138,9 @@ namespace Avernar.Gauge {
                 this._openedSlider.SetValueWithoutNotify(this._floodgate.OpenedLevel);
                 UpdateOpenedLabel();
 
+                this._automaticSettings.ToggleDisplayStyle(this._floodgate.Automatic);
+                this._firstGaugeSettings.ToggleDisplayStyle((bool)this._floodgate.FirstLink);
+                this._secondGaugeSettings.ToggleDisplayStyle((bool)this._floodgate.SecondLink);
                 this._root.ToggleDisplayStyle(true);
             }
         }
@@ -145,10 +156,18 @@ namespace Avernar.Gauge {
         }
 
         public void UpdateFragment() {
-            if ((bool)(UnityEngine.Object)this._floodgate && this._floodgate.enabled) {
+            if ((bool)(UnityEngine.Object)this._floodgate) {
                 this._root.ToggleDisplayStyle(true);
                 this._linkPanelFragment1.UpdateFragment();
                 this._linkPanelFragment2.UpdateFragment();
+                this._automaticSettings.ToggleDisplayStyle(this._floodgate.Automatic);
+                this._firstGaugeSettings.ToggleDisplayStyle((bool)this._floodgate.FirstLink);
+                this._secondGaugeSettings.ToggleDisplayStyle((bool)this._floodgate.SecondLink);
+
+                if (this._slider == null) {
+                    this._slider = this._root.parent.Q<VisualElement>("FloodgateFragment").Q<Slider>("Slider", (string)null);
+                }
+                this._slider.SetValueWithoutNotify(this._floodgate.FloodgateHeight);
             }
             else {
                 this._root.ToggleDisplayStyle(false);

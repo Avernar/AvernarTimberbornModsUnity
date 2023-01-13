@@ -6,10 +6,13 @@ using Timberborn.TickSystem;
 using Timberborn.WeatherSystem;
 using Timberborn.Buildings;
 using TimberApi.EntityLinkerSystem;
+using UnityEngine;
+
 
 namespace Avernar.Gauge {
     public class WaterPumpMonobehaviour : TickableComponent, IPersistentEntity, IFinishedStateListener {
         private static readonly ComponentKey WaterPumpKey = new(nameof(WaterPumpMonobehaviour));
+        protected static readonly PropertyKey<bool> AutomaticKey = new(nameof(Automatic));
         private static readonly PropertyKey<EntityLinker> FirstLinkKey = new(nameof(FirstLink));
         private static readonly PropertyKey<EntityLinker> SecondLinkKey = new(nameof(SecondLink));
         protected static readonly PropertyKey<WeatherActions> ActionsKey = new(nameof(Actions));
@@ -18,10 +21,13 @@ namespace Avernar.Gauge {
         protected static readonly PropertyKey<bool> OrKey = new(nameof(Or));
 
         private bool _finished;
+        private EntityLinker _linker;
+        private PausableBuilding _pausable;
         private DroughtService _droughtServíce;
         private WeatherActionsSerializer _weatherActionsSerializer;
         private WaterPumpGaugeConfigSerializer _waterPumpGaugeConfigSerializer;
 
+        public bool Automatic;
         public EntityLinker FirstLink;
         public EntityLinker SecondLink;
         public WeatherActions Actions;
@@ -30,9 +36,10 @@ namespace Avernar.Gauge {
         public bool Or;
 
         WaterPumpMonobehaviour() {
-            this.Actions = new (SeasonSetting.On, SeasonSetting.On);
-            this.Gauge1 = new (true, true, true, false, false, false);
-            this.Gauge2 = new (false, true, true, true, true, true);
+            this.Automatic = false;
+            this.Actions = new(SeasonSetting.On, SeasonSetting.On);
+            this.Gauge1 = new(true, true, true, false, false, false);
+            this.Gauge2 = new(false, true, true, true, true, true);
             this.Or = false;
         }
 
@@ -44,6 +51,8 @@ namespace Avernar.Gauge {
         }
 
         public void Awake() {
+            this._linker = GetComponent<EntityLinker>();
+            this._pausable = GetComponent<PausableBuilding>();
             _finished = false;
         }
 
@@ -51,20 +60,20 @@ namespace Avernar.Gauge {
 
         public void OnExitFinishedState() => this.enabled = false;
 
-        protected void Validate(ref EntityLinker linkee) {
+        T GetLink<T>(ref EntityLinker linkee) where T : Object {
             if ((bool)linkee) {
                 bool found = false;
-                EntityLinker linker = GetComponent<EntityLinker>();
-                ReadOnlyCollection<EntityLink> links = (ReadOnlyCollection<EntityLink>)linker.EntityLinks;
+                ReadOnlyCollection<EntityLink> links = (ReadOnlyCollection<EntityLink>)_linker.EntityLinks;
                 foreach (var link in links) {
                     if (linkee == link.Linkee) {
-                        return;
+                        return linkee.GetComponent<T>();
                     }
                 }
                 if (!found) {
                     linkee = null;
                 }
             }
+            return default;
         }
 
         public bool On() {
@@ -74,14 +83,16 @@ namespace Avernar.Gauge {
                 case SeasonSetting.On:
                     return true;
                 case SeasonSetting.Gauge:
-                    AdvancedStreamGaugeStatus status1 = (bool)this.FirstLink ? this.FirstLink.GetComponent<AdvancedStreamGaugeBase>().Status : AdvancedStreamGaugeStatus.Incomplete;
-                    AdvancedStreamGaugeStatus status2 = (bool)this.SecondLink ? this.SecondLink.GetComponent<AdvancedStreamGaugeBase>().Status : AdvancedStreamGaugeStatus.Incomplete;
+                    AdvancedStreamGaugeBase gauge1 = GetLink<AdvancedStreamGaugeBase>(ref this.FirstLink);
+                    AdvancedStreamGaugeBase gauge2 = GetLink<AdvancedStreamGaugeBase>(ref this.SecondLink);
+                    AdvancedStreamGaugeStatus status1 = (bool)gauge1 ? gauge1.Status : AdvancedStreamGaugeStatus.Incomplete;
+                    AdvancedStreamGaugeStatus status2 = (bool)gauge2 ? gauge2.Status : AdvancedStreamGaugeStatus.Incomplete;
                     bool on1 = this.Gauge1.On(status1);
                     bool on2 = this.Gauge2.On(status2);
                     return
                         status1 == AdvancedStreamGaugeStatus.Incomplete ? on2 :
                         status2 == AdvancedStreamGaugeStatus.Incomplete ? on1 :
-                        this.Or ? on1 || on2 : 
+                        this.Or ? on1 || on2 :
                         on1 && on2;
                 default:
                     break;
@@ -90,16 +101,12 @@ namespace Avernar.Gauge {
         }
 
         public override void Tick() {
-            if (_finished) {
-                //Validate(ref this.FirstLink);
-                //Validate(ref this.SecondLink);
-
-                var pausable = GetComponent<PausableBuilding>();
+            if (_finished && Automatic) {
                 if (On()) {
-                    pausable.Resume();
+                    _pausable.Resume();
                 }
                 else {
-                    pausable.Pause();
+                    _pausable.Pause();
                 }
             }
         }
@@ -116,6 +123,7 @@ namespace Avernar.Gauge {
             objectSaver.Set(Gauge1Key, this.Gauge1, this._waterPumpGaugeConfigSerializer);
             objectSaver.Set(Gauge2Key, this.Gauge2, this._waterPumpGaugeConfigSerializer);
             objectSaver.Set(OrKey, this.Or);
+            objectSaver.Set(AutomaticKey, this.Automatic);
         }
 
         public void Load(IEntityLoader entityLoader) {
@@ -123,7 +131,7 @@ namespace Avernar.Gauge {
                 return;
             }
             IObjectLoader objectLoader = entityLoader.GetComponent(WaterPumpKey);
-            if(objectLoader.Has(FirstLinkKey)) {
+            if (objectLoader.Has(FirstLinkKey)) {
                 FirstLink = objectLoader.Get(FirstLinkKey);
             }
             if (objectLoader.Has(SecondLinkKey)) {
@@ -138,6 +146,12 @@ namespace Avernar.Gauge {
             else {
                 this.Actions.Temperate = SeasonSetting.On;
                 this.Actions.Drought = SeasonSetting.On;
+            }
+            if (objectLoader.Has(AutomaticKey)) {
+                this.Automatic = objectLoader.Get(AutomaticKey);
+            }
+            else {
+                this.Automatic = true;
             }
         }
     }

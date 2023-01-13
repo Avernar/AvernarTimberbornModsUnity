@@ -38,12 +38,15 @@ namespace Avernar.Gauge {
         public int BaseZ => this._blockObject.CoordinatesAtBaseZ.z;
 
         public int FloodgateMaxHeight => _floodgate.MaxHeight;
+        public float FloodgateHeight => _floodgate.Height;
+
         public bool Automatic { get; set; }
         public float ClosedLevel { get; set; }
         public float OpenedLevel { get; set; }
         public bool BackflowPrevention { get; set; }
 
         FloodgateMonobehaviour() {
+            this.Automatic = false;
             this.Actions = new (SeasonSetting.Off, SeasonSetting.Off);
             this.Gauge1 = new (true, true, true, false, false, false);
             this.Automatic = false;
