@@ -1,10 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Bindito.Core;
 using Timberborn.CoreUI;
 using Timberborn.EntityPanelSystem;
 using Timberborn.Localization;
 using Timberborn.AssetSystem;
+using Timberborn.PrefabSystem;
+using Timberborn.SelectionSystem;
 using TimberApi.UiBuilderSystem;
+using TimberApi.EntityLinkerSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,8 +25,10 @@ namespace Avernar.Gauge {
         private static readonly string AntiSloshLocKey = "Avernar.AdvancedStreamGauge.AntiSlosh";
         private static readonly float SliderStep = 0.05f;
         private readonly ILoc _loc;
+        private readonly SelectionManager _selectionManager;
         private IResourceAssetLoader _assetLoader;
         private UIBuilder _timberApiUiBuilder;
+        private EntityLinker _linker;
         private Label _gaugeHeightLabel;
         private Label _gaugeStatusLabel;
         private Label _waterLevelLabel;
@@ -33,11 +40,18 @@ namespace Avernar.Gauge {
         private Slider _highSetPointSlider;
         private Slider _lowSetPointSlider;
         private Slider _antiSloshSlider;
+        private VisualTreeAsset _linkAsset;
         private AdvancedStreamGaugeBase _advancedStreamGaugeBase;
+        private StyleSheet _styleSheet;
         private VisualElement _root;
+        private VisualElement _linksContainer;
+        private ScrollView _links;
+        private List<VisualElement> _linkList;
 
-        public AdvancedStreamGaugeFragment(ILoc loc) {
+        public AdvancedStreamGaugeFragment(ILoc loc, SelectionManager selectionManager) {
             this._loc = loc;
+            this._selectionManager = selectionManager;
+            this._linkList = new List<VisualElement>();
         }
 
         [Inject]
@@ -47,8 +61,11 @@ namespace Avernar.Gauge {
         }
 
         public VisualElement InitializeFragment() {
+            this._styleSheet = this._assetLoader.Load<StyleSheet>("avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeStyles");
+            this._linkAsset = this._assetLoader.Load<VisualTreeAsset>("avernar.advancedstreamgauge/avernar_advancedstreamgauge/LinkButton");
             this._root = this._assetLoader.Load<VisualTreeAsset>("avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeFragment").CloneTree().ElementAt(0);
-            _timberApiUiBuilder.InitializeVisualElement(this._root);
+            this._timberApiUiBuilder.InitializeVisualElement(this._root);
+            this._root.styleSheets.Add(this._styleSheet);
 
             this._root.Q<Button>("ResetHighestWaterLevelButton", (string)null).clicked += (Action)(() => this._advancedStreamGaugeBase.ResetHighestWaterLevel());
             this._root.ToggleDisplayStyle(false);
@@ -64,6 +81,8 @@ namespace Avernar.Gauge {
             this._highSetPointSlider = this._root.Q<Slider>("HighSetPointSlider", (string)null);
             this._lowSetPointSlider = this._root.Q<Slider>("LowSetPointSlider", (string)null);
             this._antiSloshSlider = this._root.Q<Slider>("AntiSloshSlider", (string)null);
+            this._linksContainer = this._root.Q<VisualElement>("LinksContainer", (string)null);
+            this._links = this._root.Q<ScrollView>("Links", (string)null);
 
             this._highSetPointSlider.RegisterValueChangedCallback(HighSetPointChange);
             this._lowSetPointSlider.RegisterValueChangedCallback(LowSetPointChange);
@@ -99,9 +118,14 @@ namespace Avernar.Gauge {
                 this._antiSloshSlider.highValue = 5;
                 this._antiSloshSlider.SetValueWithoutNotify(this._advancedStreamGaugeBase.AntiSlosh);
                 UpdateAntiSloshLabel();
+
+                this._linker = this._advancedStreamGaugeBase.GetComponent<EntityLinker>();
+                AddLinksToContainer();
             }
         }
+
         public void ClearFragment() {
+            ClearLinksContainer();
             this._advancedStreamGaugeBase = (AdvancedStreamGaugeBase)null;
             this._root.ToggleDisplayStyle(false);
         }
@@ -165,6 +189,55 @@ namespace Avernar.Gauge {
             this._antiSloshSlider.SetValueWithoutNotify(newValue);
             this._advancedStreamGaugeBase.UpdateAntiSlosh((int)MathF.Round(newValue));
             UpdateAntiSloshLabel();
+        }
+
+        private void AddLinksToContainer() {
+            //var styleSheet = this._assetLoader.Load<StyleSheet>("avernar.advancedstreamgauge/avernar_advancedstreamgauge/AdvancedStreamGaugeStyles");
+            //var styleSheet = this._styleSheet;
+            //Plugin.Log.LogWarning(string.Format("AddLinksToContainer {0} {1}", this._styleSheet.contentHash, styleSheet.contentHash));
+            ReadOnlyCollection<EntityLink> links = (ReadOnlyCollection<EntityLink>)_linker.EntityLinks;
+            foreach (var link in links) {
+                var linkee = link.Linker == _linker ? link.Linkee :link.Linker;
+                var linkeeGameObject = (linkee).gameObject;
+                var prefab = linkeeGameObject.GetComponent<LabeledPrefab>();
+                var linkElement = this._linkAsset.CloneTree().ElementAt(0);
+                _timberApiUiBuilder.InitializeVisualElement(linkElement);
+                linkElement.styleSheets.Add(this._styleSheet);
+
+                var imageContainer = linkElement.Q<VisualElement>("ImageContainer");
+                var img = new Image {
+                    sprite = prefab.Image
+                };
+                imageContainer.Add(img);
+
+                var targetButton = linkElement.Q<Button>("Target");
+                targetButton.clicked += delegate {
+                    _selectionManager.FocusOn(linkee.gameObject);
+                };
+                linkElement.Q<Button>("RemoveLinkButton").clicked += delegate {
+                    link.Linker.DeleteLink(link);
+                    ResetLinksContainer();
+                };
+
+                var targetButtonText = linkElement.Q<Label>("ButtonText");
+                targetButtonText.text = _loc.T(prefab.DisplayNameLocKey);
+
+                this._links.Add(linkElement);
+                this._linkList.Add(linkElement);
+            }
+            this._linksContainer.ToggleDisplayStyle(links.Count > 0);
+        }
+
+        private void ResetLinksContainer() {
+            ClearLinksContainer();
+            AddLinksToContainer();
+        }
+
+        private void ClearLinksContainer() {
+            foreach (var linkElement in this._linkList) {
+                this._links.Remove(linkElement);
+            }
+            this._linkList.Clear();
         }
     }
 }

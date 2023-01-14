@@ -1,7 +1,4 @@
-using UnityEngine;
-using Bindito.Core;
 using Timberborn.Persistence;
-using Timberborn.WaterSystem;
 
 namespace Avernar.Gauge {
     public class AdvancedStreamGaugeTop : AdvancedStreamGauge, IPersistentEntity {

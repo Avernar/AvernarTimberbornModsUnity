@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="LinkButton" src="project://database/Assets/AdvancedStreamGauge/UI/LinkButton.uxml?fileID=9197481963319205126&amp;guid=3193748354e110b4193ebc2cb14b9c67&amp;type=3#LinkButton" />
     <Style src="project://database/Assets/AdvancedStreamGauge/UI/Development.uss?fileID=7433441132597879392&amp;guid=5b6b8cf0b36006a4da234dde71e5e7e2&amp;type=3#Development" />
     <Style src="project://database/Assets/AdvancedStreamGauge/UI/AdvancedStreamGaugeStyles.uss?fileID=7433441132597879392&amp;guid=f7020d3c1a458d5498a527f6a042b9f1&amp;type=3#AdvancedStreamGaugeStyles" />
     <ui:VisualElement name="LinkPanel" class="entity-panel__text avernar">
@@ -6,17 +7,7 @@
             <Timberborn.CoreUI.LocalizableButton name="LinkButton" text="Link" text-loc-key="Avernar.AdvancedStreamGauge.Link" enable-rich-text="false" class="entity-fragment__button entity-fragment__button--green entity-panel__text link-button" />
         </ui:VisualElement>
         <ui:VisualElement name="TargetContainer" class="content-centered">
-            <ui:Button display-tooltip-when-elided="true" name="Target" enable-rich-text="false" class="entity-fragment__button--green link-target">
-                <ui:VisualElement class="link-target-content">
-                    <ui:VisualElement name="LinkButtonElement" class="link-target-content">
-                        <ui:VisualElement name="ImageContainer" class="link-target-image-container" />
-                        <ui:Label text="Text" display-tooltip-when-elided="false" name="ButtonText" enable-rich-text="false" class="link-target-text" />
-                    </ui:VisualElement>
-                    <ui:Button display-tooltip-when-elided="true" enable-rich-text="false" name="RemoveLinkButton" class="entity-panel__button--red distribution-route__icon-wrapper link-target-remove-button">
-                        <ui:VisualElement class="entity-panel__button delete-building__icon" />
-                    </ui:Button>
-                </ui:VisualElement>
-            </ui:Button>
+            <ui:Instance template="LinkButton" name="Link" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

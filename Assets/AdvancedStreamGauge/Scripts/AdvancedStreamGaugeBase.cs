@@ -6,10 +6,8 @@ using Timberborn.WaterSystem;
 using Timberborn.Localization;
 using System.Collections.Generic;
 
-namespace Avernar.Gauge
-{
-    public class AdvancedStreamGaugeBase : AdvancedStreamGauge, IPersistentEntity
-    {
+namespace Avernar.Gauge {
+    public class AdvancedStreamGaugeBase : AdvancedStreamGauge, IPersistentEntity {
         private static readonly string IncompleteLocKey = "Avernar.AdvancedStreamGauge.Incomplete";
         private static readonly string OverflowLocKey = "Avernar.AdvancedStreamGauge.Overflow";
         private static readonly string HighLocKey = "Avernar.AdvancedStreamGauge.High";
@@ -133,10 +131,8 @@ namespace Avernar.Gauge
             this.HighSetPoint = GaugeHeight;
             this.LowSetPoint = 0;
             this.UpdateStatusVariables();
-            this.History = new List<float>();
-            this.History.Add(0f);
-            this._sortedHistory = new List<float>();
-            this._sortedHistory.Add(0f);
+            this.History = new List<float> { 0f };
+            this._sortedHistory = new List<float> { 0f };
         }
 
         private void UpdateStatusVariables() {
@@ -181,60 +177,78 @@ namespace Avernar.Gauge
         }
 
         public void Calculate(bool isTick = false) {
-            if (this.HighestWaterLevel > (float)this.GaugeHeight) {
-                this.HighestWaterLevel = (float)this.GaugeHeight;
-                this.UpdateMarkerHeight();
-            }
-
-            float level = Mathf.Max(this._waterService.WaterHeight(this._coordinates) - (float)this._blockObject.CoordinatesAtBaseZ.z, 0.0f);
-            if (isTick) {
-                if (AntiSlosh > 0) {
-                    var index = _sortedHistory.IndexOf(History[0]);
-                    if (index != -1) {
-                        _sortedHistory.RemoveAt(index);
-                        var index2 = _sortedHistory.BinarySearch(level);
-                        if (index2 < 0) index2 = ~index2;
-                        _sortedHistory.Insert(index2, level);
-                    }
-                    History.RemoveAt(0);
-                    History.Add(level);
-                    if (index == -1) {
-                        _sortedHistory = new List<float>(History);
-                        _sortedHistory.Sort();
-                        Plugin.Log.LogWarning("_sortedHistory element not found");
-                    }
-                    //Plugin.Log.LogInfo(string.Format("{0} | {1}", string.Join(" ", History), string.Join(" ", _sortedHistory)));
-
-                    float q1 = _sortedHistory[_q1Index];
-                    float q3 = _sortedHistory[_q3Index];
-                    float iqr = q3 - q1;
-                    float lowerFence = q1 - (1.5f * iqr);
-                    float upperFence = q3 + (1.5f * iqr);
-                    float acc = 0.0f;
-                    int count = 0;
-                    foreach (float f in _sortedHistory) {
-                        if (lowerFence <= f && f <= upperFence) {
-                            acc += f;
-                            count++;
-                        }
-                    }
-                    if (count > 0) {
-                        level = acc / count;
-                    }
-                    //Plugin.Log.LogInfo(string.Format("q1={0} q3={1} iqr={2} lowerFence={3} upperFence={4} acc={5} count={6} level={7}", q1.ToString("0.000"), q3.ToString("0.000"), iqr.ToString("0.000"), lowerFence.ToString("0.000"), upperFence.ToString("0.000"), acc.ToString("0.000"), count.ToString(""), level.ToString("0.000")));
-                }
-                else {
-                    History[0] = level;
-                    _sortedHistory[0] = level;
-                }
-            }
-            this._waterLevel = level;
-
-            this._waterCurrent = Mathf.Max(Mathf.Abs(this._waterService.WaterFlowDirection(this._coordinates).x), Mathf.Abs(this._waterService.WaterFlowDirection(this._coordinates).y));
-
             (this.Complete, this.GaugeHeight) = this.CalculateTotalHeight();
-            
-            UpdateStatusVariables();
+
+            if (!this.Complete) {
+                if (this._sortedHistory.Count > 0 && this._sortedHistory[this._sortedHistory.Count - 1] != 0f) {
+                    for (int i = 0; i < this._sortedHistory.Count; i++) { this._sortedHistory[i] = 0f; }
+                    for (int i = 0; i < this.History.Count; i++) { this.History[i] = 0f; }
+                }
+                this._waterLevel = 0f;
+                this._waterCurrent = 0f;
+                this.HighestWaterLevel = 0f;
+                this.UpdateMarkerHeight();
+                this.UpdateStatusVariables();
+            }
+            else {
+                if (this.HighestWaterLevel > (float)this.GaugeHeight) {
+                    this.HighestWaterLevel = (float)this.GaugeHeight;
+                    this.UpdateMarkerHeight();
+                }
+
+                float level = Mathf.Max(this._waterService.WaterHeight(this._coordinates) - (float)this._blockObject.CoordinatesAtBaseZ.z, 0.0f);
+                if (isTick) {
+                    if (AntiSlosh > 0) {
+                        var index = _sortedHistory.IndexOf(History[0]);
+                        if (index != -1) {
+                            _sortedHistory.RemoveAt(index);
+                            var index2 = _sortedHistory.BinarySearch(level);
+                            if (index2 < 0) index2 = ~index2;
+                            _sortedHistory.Insert(index2, level);
+                        }
+                        History.RemoveAt(0);
+                        History.Add(level);
+                        if (index == -1) {
+                            _sortedHistory = new List<float>(History);
+                            _sortedHistory.Sort();
+                            Plugin.Log.LogWarning("_sortedHistory element not found");
+                        }
+                        //Plugin.Log.LogInfo(string.Format("{0} | {1}", string.Join(" ", History), string.Join(" ", _sortedHistory)));
+
+                        float q1 = _sortedHistory[_q1Index];
+                        float q3 = _sortedHistory[_q3Index];
+                        float iqr = q3 - q1;
+                        float lowerFence = q1 - (1.5f * iqr);
+                        float upperFence = q3 + (1.5f * iqr);
+                        float acc = 0.0f;
+                        int count = 0;
+                        foreach (float f in _sortedHistory) {
+                            if (lowerFence <= f && f <= upperFence) {
+                                acc += f;
+                                count++;
+                            }
+                        }
+                        if (count > 0) {
+                            level = acc / count;
+                        }
+                        //Plugin.Log.LogInfo(string.Format("q1={0} q3={1} iqr={2} lowerFence={3} upperFence={4} acc={5} count={6} level={7}", q1.ToString("0.000"), q3.ToString("0.000"), iqr.ToString("0.000"), lowerFence.ToString("0.000"), upperFence.ToString("0.000"), acc.ToString("0.000"), count.ToString(""), level.ToString("0.000")));
+                    }
+                    else {
+                        History[0] = level;
+                        _sortedHistory[0] = level;
+                    }
+                }
+                this._waterLevel = level;
+
+                this._waterCurrent = Mathf.Max(Mathf.Abs(this._waterService.WaterFlowDirection(this._coordinates).x), Mathf.Abs(this._waterService.WaterFlowDirection(this._coordinates).y));
+
+                this.UpdateStatusVariables();
+
+                if ((double)this.HighestWaterLevel < (double)this.WaterLevel) {
+                    this.HighestWaterLevel = this.WaterLevel;
+                    this.UpdateMarkerHeight();
+                }
+            }
 
             if (this.HighSetPoint > this.MaxLevel) {
                 this.HighSetPoint = this.MaxLevel;
@@ -242,11 +256,6 @@ namespace Avernar.Gauge
 
             if (this.LowSetPoint > this.MaxLevel) {
                 this.LowSetPoint = this.MaxLevel;
-            }
-
-            if ((double)this.HighestWaterLevel < (double)this.WaterLevel) {
-                this.HighestWaterLevel = this.WaterLevel;
-                this.UpdateMarkerHeight();
             }
         }
 

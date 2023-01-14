@@ -18,5 +18,9 @@
             <ui:Label text="Anti slosh: " display-tooltip-when-elided="true" enable-rich-text="false" name="AntiSloshLabel" class="entity-panel__text slider-label__spacing" style="height: 17px;" />
             <ui:Slider picking-mode="Ignore" value="0" high-value="0" name="AntiSloshSlider" show-input-field="false" page-size="1" class="slider" />
         </ui:VisualElement>
+        <ui:VisualElement name="LinksContainer" class="top-margin-big">
+            <Timberborn.CoreUI.LocalizableLabel name="LinksLabel" text="Linked items:" text-loc-key="Avernar.AdvancedStreamGauge.LinkedItems" class="entity-panel__text" />
+            <ui:ScrollView name="Links" vertical-scroller-visibility="AlwaysVisible" class="game-scroll-view links_scrollview" />
+        </ui:VisualElement>
     </Timberborn.CoreUI.NineSliceVisualElement>
 </ui:UXML>

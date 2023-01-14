@@ -15,6 +15,7 @@ namespace Avernar.Gauge {
     [Configurator(SceneEntrypoint.InGame)]
     public class FloodgateEntityActionConfigurator : IConfigurator {
         public void Configure(IContainerDefinition containerDefinition) {
+            containerDefinition.Bind<UnlockGaguePiecesService>().AsSingleton();
             containerDefinition.Bind<EnumObjectSerializer<SeasonSetting>>().AsSingleton();
             containerDefinition.Bind<WeatherActionsSerializer>().AsSingleton();
             containerDefinition.Bind<WaterPumpGaugeConfigSerializer>().AsSingleton();

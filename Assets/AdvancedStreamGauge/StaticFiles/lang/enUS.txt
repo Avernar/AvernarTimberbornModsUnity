@@ -60,3 +60,5 @@ Avernar.AdvancedStreamGauge.SlowOpenGauge,Slow Open Gauge:
 Avernar.AdvancedStreamGauge.Automatic,Automatic
 Avernar.AdvancedStreamGauge.Manual,Manual
 Avernar.AdvancedStreamGauge.BackflowPrevention,Backflow prevention:
+Avernar.AdvancedStreamGauge.LinkedItems,Linked items:
+Avernar.AdvancedStreamGauge.UnlockPrompt,You need to unlock {0} to build {1}.,{0} stands for Avernar.AdvancedStreamGaugeBase.DisplayName {1} stands for Avernar.AdvancedStreamGauge[Middle#|Top#].DisplayName.

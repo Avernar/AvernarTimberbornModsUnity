@@ -119,7 +119,7 @@
 	color: rgb(204, 204, 204);
 	-unity-font-style: normal;
 	height: 30px;
-	width: 290px;
+	width: 275px;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
 }
@@ -143,11 +143,18 @@
 }
 
 .link-target-text {
+	width: 210px;
 	-unity-text-align: middle-left;
 	padding-left: 3px;
 }
 
 .link-target-remove-button {
 	background-color: rgba(0, 0, 0, 0);
-	margin: 1px 2px 0 auto;
+	margin: 1px 2px 0 0;
+}
+
+.links_scrollview {
+	margin-top: 6px;
+	flex-direction: row;
+	max-height: 170px;
 }

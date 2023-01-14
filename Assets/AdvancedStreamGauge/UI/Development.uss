@@ -262,3 +262,16 @@ unitybasefield__input {
 .delete-building__icon {
     background-image: url('project://database/Assets/Timberborn/ui/images/master/ico-trash.png?fileID=2800000&guid=e6a7126f680ffa64295c32447e957687&type=3#ico-trash');
 }
+
+.game-scroll-view > .unity-scroll-view__content-and-vertical-scroll-container > .unity-scroller > .unity-slider .unity-base-slider__dragger {
+    background-image: url('project://database/Assets/Timberborn/ui/images/backgrounds/bg-pixel-2.png?fileID=2800000&guid=6438117c2d3fcd04c9f97136ec228b5f&type=3#bg-pixel-2');
+	width: 5px;
+	left: 0;
+}
+
+.dwelling-user-fragment__buttons {
+  margin-top: 4px;
+  flex-direction: row;
+  max-height: 230px;
+}
+

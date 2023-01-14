@@ -10,8 +10,7 @@ using Timberborn.ConstructibleSystem;
 using Timberborn.EntitySystem;
 
 namespace Avernar.Gauge {
-    public class AdvancedStreamGauge : TickableComponent, IFinishedStateListener, IRegisteredComponent
-    {
+    public class AdvancedStreamGauge : TickableComponent, IFinishedStateListener, IRegisteredComponent {
         protected BlockObject _blockObject;
         protected Vector2Int _coordinates;
         protected BlockService _blockService;
@@ -27,9 +26,13 @@ namespace Avernar.Gauge {
         public void OnEnterFinishedState() {
             this._coordinates = this.GetCoordinatesXY();
             this.enabled = true;
+            GetBase().Calculate();
         }
 
-        public void OnExitFinishedState() => this.enabled = false;
+        public void OnExitFinishedState() {
+            GetBase().Calculate();
+            this.enabled = false;
+        }
 
         internal virtual bool IsBase() => false;
         internal virtual bool IsMiddle() => false;

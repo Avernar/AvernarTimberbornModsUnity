@@ -24,6 +24,7 @@
         "Timberborn.AssetSystem.dll",
         "Timberborn.BlockSystem.dll",
         "Timberborn.EntitySystem.dll",
+        "Timberborn.ScienceSystem.dll",
         "Timberborn.TerrainSystem.dll",
         "Timberborn.WeatherSystem.dll",
         "Timberborn.PickObjectToolSystem.dll",
@@ -42,6 +43,7 @@
         "Timberborn.Localization.dll",
         "Timberborn.PreviewSystem.dll",
         "Timberborn.Buildings.dll",
+        "Timberborn.BlockObjectTools.dll",
         "System.Collections.Immutable.dll"
     ],
     "autoReferenced": true,
