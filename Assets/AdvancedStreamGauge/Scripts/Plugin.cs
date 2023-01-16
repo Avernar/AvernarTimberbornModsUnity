@@ -8,7 +8,7 @@ namespace Avernar.Gauge {
     {
         public const string PluginGuid = "avernar.advancedstreamgauge";
         public const string PluginName = "AdvancedStreamGauge";
-        public const string PluginVersion = "1.1.3";
+        public const string PluginVersion = "1.1.4";
 
         public static IConsoleWriter Log;
 

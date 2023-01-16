@@ -1,0 +1,64 @@
+ID,Text,Comment
+Avernar.AdvancedStreamGauge.DisplayName,Erweiterte Wasserströmungsanzeige,-
+Avernar.AdvancedStreamGaugeBase.DisplayName,Erweiterte Wasserströmungsanzeige\r\nBasis,-
+Avernar.AdvancedStreamGaugeMiddle2.DisplayName,Erweiterte Wasserströmungsanzeige\r\nMitte doppelte Höhe,-
+Avernar.AdvancedStreamGaugeMiddle4.DisplayName,Erweiterte Wasserströmungsanzeige\r\nMitte vierfache Höhe,-
+Avernar.AdvancedStreamGaugeMiddle8.DisplayName,Erweiterte Wasserströmungsanzeige\r\nMitte achtfache Höhe,-
+Avernar.AdvancedStreamGaugeTop1.DisplayName,Erweiterte Wasserströmungsanzeige\r\nSpitze,-
+Avernar.AdvancedStreamGaugeTop2.DisplayName,Erweiterte Wasserströmungsanzeige\r\nSpitze doppelte Höhe,-
+Avernar.AdvancedStreamGaugeBase.Description,Beginnen Sie die Wasserströmungsanzeige damit.,-
+Avernar.AdvancedStreamGaugeMiddle.Description,Fügen Sie der Wasserströmungsanzeige Höhe (Tiefe?) hinzu.,-
+Avernar.AdvancedStreamGaugeTop.Description,Krönen Sie die Wasserströmungsanzeige damit.,-
+Avernar.AdvancedStreamGaugeBase.FlavorDescription,\u201EIrgendwo muss man ja anfangen.\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGaugeMiddle2.FlavorDescription,\u201EEin bisschen mehr.\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGaugeMiddle4.FlavorDescription,\u201EGrößer!\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGaugeMiddle8.FlavorDescription,\u201EViiiiiiiiel Größer!!\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGaugeTop2.FlavorDescription,\u201ENoch ein bisschen mehr und einen Deckel drauf.\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGaugeTop1.FlavorDescription,\u201EEin bisschen mehr und einen Deckel drauf.\u201C \u2013 Rufus,-
+Avernar.AdvancedStreamGauge.UnsuitableBelow,Keine erweiterte Wasserströmungsanzeige darunter.,-
+Avernar.AdvancedStreamGauge.CanNotBePlaced,Kann nicht auf einer erweiterten Wasserströmungsanzeige platziert werden.,-
+Avernar.AdvancedStreamGauge.GaugeHeight,Höhe der Anzeige: {0},-
+Avernar.AdvancedStreamGauge.GaugeStatus,Status der Anzeige: {0},-
+Avernar.AdvancedStreamGauge.WaterLevel,Wasserstand: {0},-
+Avernar.AdvancedStreamGauge.HighestWaterLevel,Höchster Wasserstand: {0},-
+Avernar.AdvancedStreamGauge.WaterCurrent,Fließgeschwindigkeit: {0} m\u00B3/s,-
+Avernar.AdvancedStreamGauge.Reset,Zurücksetzen,-
+Avernar.AdvancedStreamGauge.Incomplete,Unvollständig,-
+Avernar.AdvancedStreamGauge.Dry,Trocken,-
+Avernar.AdvancedStreamGauge.Low,Niedrig,-
+Avernar.AdvancedStreamGauge.NormalWasHigh,Normal war Hoch,-
+Avernar.AdvancedStreamGauge.NormalWasLow,Normal war Niedrig,-
+Avernar.AdvancedStreamGauge.High,Hoch,-
+Avernar.AdvancedStreamGauge.Overflow,Überschwemmt,-
+Avernar.AdvancedStreamGauge.HighSetPoint,Hoher Sollwert: {0},-
+Avernar.AdvancedStreamGauge.LowSetPoint,Niedriger Sollwert: {0},-
+Avernar.AdvancedStreamGauge.AntiSlosh,Anti-Schwappen: {0},-
+Avernar.AdvancedStreamGauge.Controls,Erweiterte Wasserströmungsanzeige Steuerung,-
+Avernar.AdvancedStreamGauge.Link,Verbinden
+Avernar.AdvancedStreamGauge.StartLinkingTitle,Erweiterte Wasserströmungsanzeige Verbindung
+Avernar.AdvancedStreamGauge.StartLinkingTip,Wählen Sie eine Erweiterte Wasserströmungsanzeige
+Avernar.AdvancedStreamGauge.TemperateLabel,Gemäßigt:
+Avernar.AdvancedStreamGauge.DroughtLabel,Dürre:
+Avernar.AdvancedStreamGauge.DryLabel,Trocken:
+Avernar.AdvancedStreamGauge.LowLabel,Niedrig:
+Avernar.AdvancedStreamGauge.NormalWasHighLabel,Normal war Hoch:
+Avernar.AdvancedStreamGauge.NormalWasLowLabel,Normal war Niedrig:
+Avernar.AdvancedStreamGauge.HighLabel,Hoch:
+Avernar.AdvancedStreamGauge.OverflowLabel,Überschwemmt:
+Avernar.AdvancedStreamGauge.And,Und
+Avernar.AdvancedStreamGauge.Or,Oder
+Avernar.AdvancedStreamGauge.Off,Aus
+Avernar.AdvancedStreamGauge.On,Ein
+Avernar.AdvancedStreamGauge.Gauge,Anzeige
+Avernar.AdvancedStreamGauge.LinkText,Level: {0} ({1})
+Avernar.AdvancedStreamGauge.Close,Schließen
+Avernar.AdvancedStreamGauge.Open,Öffnen
+Avernar.AdvancedStreamGauge.Closed,Geschlossen: {0}
+Avernar.AdvancedStreamGauge.Opened,Geöffnet: {0}
+Avernar.AdvancedStreamGauge.ControlGauge,Steuerungsanzeige:
+Avernar.AdvancedStreamGauge.SlowOpenGauge,Langsam öffnende Anzeige:
+Avernar.AdvancedStreamGauge.Automatic,Automatisch
+Avernar.AdvancedStreamGauge.Manual,Manuell
+Avernar.AdvancedStreamGauge.BackflowPrevention,Rückflußprävention:
+Avernar.AdvancedStreamGauge.LinkedItems,Verbundene Objekte:
+Avernar.AdvancedStreamGauge.UnlockPrompt,"Sie müssen {0} freischalten, um {1} zu bauen.",{0} steht für Avernar.AdvancedStreamGaugeBase.DisplayName {1} steht für Avernar.AdvancedStreamGauge[Middle#|Top#].DisplayName.
