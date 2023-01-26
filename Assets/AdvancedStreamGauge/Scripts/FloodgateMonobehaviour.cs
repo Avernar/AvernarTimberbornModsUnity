@@ -19,6 +19,8 @@ namespace Avernar.Gauge {
         protected static readonly PropertyKey<WeatherActions> ActionsKey = new(nameof(Actions));
         protected static readonly PropertyKey<GaugeConfig> Gauge1Key = new(nameof(Gauge1));
         protected static readonly PropertyKey<bool> AutomaticKey = new(nameof(Automatic));
+        protected static readonly PropertyKey<float> ClosedLevelKey = new(nameof(ClosedLevel));
+        protected static readonly PropertyKey<float> OpenedLevelKey = new(nameof(OpenedLevel));
         protected static readonly PropertyKey<bool> BackflowPreventionKey = new(nameof(BackflowPrevention));
 
         protected bool _finished;
@@ -167,6 +169,8 @@ namespace Avernar.Gauge {
             objectSaver.Set(ActionsKey, this.Actions, this._weatherActionsSerializer);
             objectSaver.Set(Gauge1Key, this.Gauge1, this._waterPumpGaugeConfigSerializer);
             objectSaver.Set(AutomaticKey, this.Automatic);
+            objectSaver.Set(ClosedLevelKey, this.ClosedLevel);
+            objectSaver.Set(OpenedLevelKey, this.OpenedLevel);
             objectSaver.Set(BackflowPreventionKey, this.BackflowPrevention);
         }
 
@@ -185,9 +189,15 @@ namespace Avernar.Gauge {
                 this.Actions = objectLoader.Get(ActionsKey, this._weatherActionsSerializer);
                 this.Gauge1 = objectLoader.Get(Gauge1Key, this._waterPumpGaugeConfigSerializer);
                 this.Automatic = objectLoader.Get(AutomaticKey);
-                if (objectLoader.Has(BackflowPreventionKey)) {
-                    this.BackflowPrevention = objectLoader.Get(BackflowPreventionKey);
-                }
+            }
+            if (objectLoader.Has(ClosedLevelKey)) {
+                this.ClosedLevel = objectLoader.Get(ClosedLevelKey);
+            }
+            if (objectLoader.Has(OpenedLevelKey)) {
+                this.OpenedLevel = objectLoader.Get(OpenedLevelKey);
+            }
+            if (objectLoader.Has(BackflowPreventionKey)) {
+                this.BackflowPrevention = objectLoader.Get(BackflowPreventionKey);
             }
         }
     }
